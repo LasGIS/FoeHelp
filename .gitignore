@@ -1,0 +1,26 @@
+# IntellijIDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+
+### Java
+*.class
+*.jar
+*.war
+*.ear
+
+### Maven
+target/
+
+### Tests
+logs/
+*.log
+*.gz
+
+### npm (Node.js|https://nodejs.org/ru/)
+node_modules/
+deploy/
+node_js/
+/build/
