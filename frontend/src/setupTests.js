@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020. Prototype
+ * Copyright 2020 LasGIS FOE Helper
  */
 
 // jest-dom adds custom jest matchers for asserting on DOM nodes.
