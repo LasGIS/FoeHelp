@@ -7,12 +7,11 @@
   margin: 12px;
   float: left;
   text-align: center;
-  align-content: center;
-  /*line-height: 28px;*/
 }
 
 .logo > span {
-  color: #2f54eb;
+  color: #808080;
+  vertical-align: middle;
 }
 
 .site-left-menu {
