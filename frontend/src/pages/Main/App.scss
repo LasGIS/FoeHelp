@@ -6,16 +6,19 @@
   background: rgba(255, 255, 255, 0.2);
   margin: 12px;
   float: left;
-  text-align: center;
-}
-
-.logo > span {
-  color: #808080;
-  vertical-align: middle;
+  text-align: left;
+  &__short{
+    width: 56px;
+  }
+  & > span{
+    color: #808080;
+    vertical-align: middle;
+    padding-left: 12px;
+  }
 }
 
 .site-left-menu {
-
+  width: 200px;
 }
 
 .site-layout-background {

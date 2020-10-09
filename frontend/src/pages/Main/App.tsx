@@ -1,12 +1,20 @@
-import React from 'react';
+/*
+ * Copyright 2020 LasGIS FOE Helper
+ */
+
+import './App.scss';
+import React, { useState } from 'react';
 import { Breadcrumb, Button, Layout, Menu, Space } from 'antd';
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
-import './App.css';
+import classNames from 'classnames';
 
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
 
 const App = () => {
+
+  const [ menuCollapsed, setMenuCollapsed ] = useState<boolean>(false);
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       {/*<Header className="header">
@@ -17,8 +25,15 @@ const App = () => {
         </Menu>
       </Header>
       <Layout>*/}
-      <Sider width={200} className="site-left-menu">
-        <div className="logo"><span>Logo Foe Helper</span></div>
+      <Sider
+        className="site-left-menu"
+        collapsible
+        collapsed={menuCollapsed}
+        onCollapse={(collapsed) => {
+          setMenuCollapsed(collapsed);
+        }}
+      >
+        <div className={classNames("logo", { "logo__short": menuCollapsed })}><span>Logo</span></div>
         <Menu
           mode="inline"
           theme='dark'
