@@ -6,10 +6,9 @@ import './App.scss';
 import React, { useState } from 'react';
 import { Link, Route, Switch } from "react-router-dom";
 import { Breadcrumb, Layout, Menu } from 'antd';
-import { HomeOutlined, LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import Home from "../Home/Home";
-import Optional from "../Optional/Optional";
+import { MENU_DATA, MenuData } from "./MenuHelper";
 
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
@@ -18,39 +17,49 @@ const App = () => {
 
   const [ menuCollapsed, setMenuCollapsed ] = useState<boolean>(false);
 
-  const SubMenuOptionals = () => {
-    const subMenus = [];
-    for (let sub: number = 1; sub < 5; sub++) {
-      const options = [];
-      for (let opt: number = 1; opt < 5; opt++) {
-        options.push(
-          <Menu.Item key={`sub${sub}-${opt}`} icon={<LaptopOutlined/>}>
-            <span>option{opt}</span>
-            <Link to={`sub${sub}-option${opt}`}/>
-          </Menu.Item>
-        )
+  const resolveSubmenu = (subMenus: MenuData[]) => {
+    return subMenus.map((menu: MenuData) => {
+      switch (menu.type) {
+        case "option": {
+          return (
+            <Menu.Item key={menu.key} icon={menu.icon}>
+              <span>{menu.name}</span>
+              <Link to={menu.pathname}/>
+            </Menu.Item>
+          );
+        }
+        case "submenu": {
+          return (
+            <SubMenu key={menu.key} icon={menu.icon} title={menu.name}>
+              {resolveSubmenu(menu.subMenus)}
+            </SubMenu>
+          );
+        }
+        default:
+          return null;
       }
-      subMenus.push(
-        <SubMenu key={`sub${sub}`} icon={<UserOutlined/>} title={`sub navigation ${sub}`}>
-          {options}
-        </SubMenu>
-      );
-    }
-    return subMenus;
+    });
   };
 
-  const RouteOptionals = () => {
-    const routes = [];
-    for (let sub: number = 1; sub < 5; sub++) {
-      for (let opt: number = 1; opt < 5; opt++) {
-        routes.push(
-          <Route key={`sub${sub}-${opt}`} path={`/sub${sub}-option${opt}`}>
-            <Optional text={`SUB${sub} OPTION${opt}`}/>
-          </Route>
-        );
+  const resolveRoutes = (subMenus: MenuData[]): any[] => {
+    return subMenus.map((menu: MenuData) => {
+      const summary = [];
+      switch (menu.type) {
+        case "option": {
+          summary.push(
+            <Route key={menu.key} path={menu.pathname}>
+              {menu.component}
+            </Route>
+          );
+          break;
+        }
+        case "submenu": {
+          summary.push(resolveRoutes(menu.subMenus));
+          break;
+        }
       }
-    }
-    return routes;
+      return summary;
+    });
   };
 
   return (
@@ -71,12 +80,7 @@ const App = () => {
           defaultOpenKeys={[ 'sub1' ]}
           style={{ height: '100%' }}
         >
-          <Menu.Item key="home">
-            <HomeOutlined/>
-            <span>Home</span>
-            <Link to="home"/>
-          </Menu.Item>
-          {SubMenuOptionals()}
+          {resolveSubmenu(MENU_DATA)}
         </Menu>
       </Sider>
       <Layout style={{ padding: '0 12px' }}>
@@ -89,7 +93,7 @@ const App = () => {
           <Switch>
             <Route key='zero' exact path="/" component={Home}/>
             <Route key='home' path="/home" component={Home}/>
-            {RouteOptionals()}
+            {resolveRoutes(MENU_DATA)}
           </Switch>
         </Content>
         <Footer className='footer'>LasGIS ©2020 Created using Ant Design</Footer>
