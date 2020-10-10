@@ -8,6 +8,7 @@ import './index.css';
 import App from './pages/Main/App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from "react-redux";
+import { BrowserRouter as Router } from "react-router-dom";
 import configureStore from "./redux/configureStore";
 
 const store = configureStore();
@@ -15,7 +16,9 @@ const store = configureStore();
 ReactDOM.render(
 //  <React.StrictMode>
   <Provider store={store}>
-    <App/>
+    <Router basename={process.env.PUBLIC_URL}>
+      <App/>
+    </Router>
   </Provider>
 //  </React.StrictMode>
   , document.getElementById('root')

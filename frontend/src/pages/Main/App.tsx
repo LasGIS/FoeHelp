@@ -4,9 +4,12 @@
 
 import './App.scss';
 import React, { useState } from 'react';
-import { Breadcrumb, Button, Layout, Menu, Space } from 'antd';
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
+import { Link, Route, Switch } from "react-router-dom";
+import { Breadcrumb, Layout, Menu } from 'antd';
+import { HomeOutlined, LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
+import Home from "../Home/Home";
+import Optional from "../Optional/Optional";
 
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
@@ -15,16 +18,43 @@ const App = () => {
 
   const [ menuCollapsed, setMenuCollapsed ] = useState<boolean>(false);
 
+  const SubMenuOptionals = () => {
+    const subMenus = [];
+    for (let sub: number = 1; sub < 5; sub++) {
+      const options = [];
+      for (let opt: number = 1; opt < 5; opt++) {
+        options.push(
+          <Menu.Item key={`sub${sub}-${opt}`}>
+            <span>option{opt}</span>
+            <Link to={`sub${sub}-option${opt}`}/>
+          </Menu.Item>
+        )
+      }
+      subMenus.push(
+        <SubMenu key={`sub${sub}`} icon={<UserOutlined/>} title={`sub navigation ${sub}`}>
+          {options}
+        </SubMenu>
+      );
+    }
+    return subMenus;
+  };
+
+  const RouteOptionals = () => {
+    const routes = [];
+    for (let sub: number = 1; sub < 5; sub++) {
+      for (let opt: number = 1; opt < 5; opt++) {
+        routes.push(
+          <Route path={`/sub${sub}-option${opt}`}>
+            <Optional text={`SUB${sub} OPTION${opt}`}/>
+          </Route>
+        );
+      }
+    }
+    return routes;
+  };
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      {/*<Header className="header">
-        <Menu theme="light" mode="horizontal" defaultSelectedKeys={[ '2' ]}>
-          <Menu.Item key="1">nav 1</Menu.Item>
-          <Menu.Item key="2">nav 2</Menu.Item>
-          <Menu.Item key="3">nav 3</Menu.Item>
-        </Menu>
-      </Header>
-      <Layout>*/}
       <Sider
         className="site-left-menu"
         collapsible
@@ -41,24 +71,12 @@ const App = () => {
           defaultOpenKeys={[ 'sub1' ]}
           style={{ height: '100%' }}
         >
-          <SubMenu key="sub1" icon={<UserOutlined/>} title="subnav 1">
-            <Menu.Item key="1">option1</Menu.Item>
-            <Menu.Item key="2">option2</Menu.Item>
-            <Menu.Item key="3">option3</Menu.Item>
-            <Menu.Item key="4">option4</Menu.Item>
-          </SubMenu>
-          <SubMenu key="sub2" icon={<LaptopOutlined/>} title="subnav 2">
-            <Menu.Item key="5">option5</Menu.Item>
-            <Menu.Item key="6">option6</Menu.Item>
-            <Menu.Item key="7">option7</Menu.Item>
-            <Menu.Item key="8">option8</Menu.Item>
-          </SubMenu>
-          <SubMenu key="sub3" icon={<NotificationOutlined/>} title="subnav 3">
-            <Menu.Item key="9">option9</Menu.Item>
-            <Menu.Item key="10">option10</Menu.Item>
-            <Menu.Item key="11">option11</Menu.Item>
-            <Menu.Item key="12">option12</Menu.Item>
-          </SubMenu>
+          <Menu.Item key="home">
+            <HomeOutlined/>
+            <span>Home</span>
+            <Link to="home"/>
+          </Menu.Item>
+          {SubMenuOptionals()}
         </Menu>
       </Sider>
       <Layout style={{ padding: '0 12px' }}>
@@ -68,12 +86,11 @@ const App = () => {
           <Breadcrumb.Item>App</Breadcrumb.Item>
         </Breadcrumb>
         <Content className="site-layout-background">
-          <Space align='center'>
-            <Button title='ttt' name='Button1'>Button1</Button>
-            <Button title='ttt' name='Button2'>Button2</Button>
-            <Button title='ttt' name='Button3'>Button3</Button>
-            <Button title='ttt' name='Button4'>Button4</Button>
-          </Space>
+          <Switch>
+            <Route exact path="/" component={Home}/>
+            <Route path="/home" component={Home}/>
+            {RouteOptionals()}
+          </Switch>
         </Content>
         <Footer className='footer'>Ant Design ©2018 Created by Ant UED</Footer>
       </Layout>
