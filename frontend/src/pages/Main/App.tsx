@@ -92,7 +92,7 @@ const App = () => {
             {RouteOptionals()}
           </Switch>
         </Content>
-        <Footer className='footer'>Ant Design ©2018 Created by Ant UED</Footer>
+        <Footer className='footer'>LasGIS ©2020 Created using Ant Design</Footer>
       </Layout>
     </Layout>
   );

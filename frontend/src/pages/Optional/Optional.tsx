@@ -6,7 +6,7 @@ type Props = {
 }
 
 const Optional = ({ text }: Props) => <Space align='center'>
-  <div>{text}</div>
+  <h1>{text}</h1>
 </Space>;
 
 export default Optional;
