@@ -24,7 +24,7 @@ const App = () => {
       const options = [];
       for (let opt: number = 1; opt < 5; opt++) {
         options.push(
-          <Menu.Item key={`sub${sub}-${opt}`}>
+          <Menu.Item key={`sub${sub}-${opt}`} icon={<LaptopOutlined/>}>
             <span>option{opt}</span>
             <Link to={`sub${sub}-option${opt}`}/>
           </Menu.Item>
@@ -44,7 +44,7 @@ const App = () => {
     for (let sub: number = 1; sub < 5; sub++) {
       for (let opt: number = 1; opt < 5; opt++) {
         routes.push(
-          <Route path={`/sub${sub}-option${opt}`}>
+          <Route key={`sub${sub}-${opt}`} path={`/sub${sub}-option${opt}`}>
             <Optional text={`SUB${sub} OPTION${opt}`}/>
           </Route>
         );
@@ -87,8 +87,8 @@ const App = () => {
         </Breadcrumb>
         <Content className="site-layout-background">
           <Switch>
-            <Route exact path="/" component={Home}/>
-            <Route path="/home" component={Home}/>
+            <Route key='zero' exact path="/" component={Home}/>
+            <Route key='home' path="/home" component={Home}/>
             {RouteOptionals()}
           </Switch>
         </Content>

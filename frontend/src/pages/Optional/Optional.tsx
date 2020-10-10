@@ -5,7 +5,7 @@ type Props = {
   text: string;
 }
 
-const Optional = ({ text }: Props) => <Space align='center'>
+const Optional: React.FC<Props> = ({ text }) => <Space align='center'>
   <h1>{text}</h1>
 </Space>;
 
