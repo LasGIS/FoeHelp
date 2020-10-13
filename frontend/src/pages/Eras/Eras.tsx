@@ -8,8 +8,13 @@ const ErasPage: React.FC = (props) => {
 
   return (
     <Table
+      style={{ width: '300px' }}
       dataSource={ERAS}
       columns={[ {
+        title: '№',
+        dataIndex: 'key',
+        width: '20px'
+      }, {
         title: 'Абр.',
         dataIndex: 'short',
         width: '60px',
@@ -17,7 +22,6 @@ const ErasPage: React.FC = (props) => {
       }, {
         title: 'Полное название',
         dataIndex: 'name',
-        width: '260px',
         sorter: (a: EraType, b: EraType) => compareAlphabetically(a.name, b.name),
       } ]}
       bordered

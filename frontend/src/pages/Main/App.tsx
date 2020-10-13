@@ -13,6 +13,9 @@ import { findSelectedMenuByPathname, MENU_DATA, MenuData } from "./MenuHelper";
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
 
+/**  */
+const version = '1.0.0.2';
+
 const resolveSubmenu = (subMenus: MenuData[]) => {
   return subMenus.map((menu: MenuData) => {
     switch (menu.type) {
@@ -109,7 +112,7 @@ function App() {
             {RESOLVED_ROUTES}
           </Switch>
         </Content>
-        <Footer className='footer'>LasGIS ©2020 Created using Ant Design</Footer>
+        <Footer className='footer'>LasGIS ©2020 Created using Ant Design - version({version})</Footer>
       </Layout>
     </Layout>
   );

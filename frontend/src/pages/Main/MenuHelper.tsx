@@ -44,25 +44,25 @@ export const MENU_DATA: MenuData[] = [
       pathname: "/great-buildings", component: <Optional text="Great Buildings"/>
     } ]
   }, {
-    type: 'submenu', key: "sub2", name: "sub navigation 2", icon: <DesktopOutlined/>,
+    type: 'submenu', key: "sub2", name: "navigation 2", icon: <DesktopOutlined/>,
     subMenus: [ {
       type: 'option', key: "sub2-1", name: "Option 1", icon: <LaptopOutlined/>,
       pathname: "/sub2-option1", component: <Optional text="SUB2 OPTION1"/>
     }, {
-      type: 'submenu', key: "sub22", name: "sub navigation 22", icon: <DesktopOutlined/>,
+      type: 'submenu', key: "sub22", name: "navigation 22", icon: <DesktopOutlined/>,
       subMenus: [ {
         type: 'option', key: "sub22-1", name: "Option 1", icon: <LaptopOutlined/>,
-        pathname: "/sub22-option1", component: <Optional text="SUB22 OPTION1"/>
+        pathname: "/sub22-option1", component: <Optional text="SUB2 SUB22 OPTION1"/>
       },{
         type: 'option', key: "sub22-2", name: "Option 2", icon: <LaptopOutlined/>,
-        pathname: "/sub22-option2", component: <Optional text="SUB22 OPTION2"/>
+        pathname: "/sub22-option2", component: <Optional text="SUB2 SUB22 OPTION2"/>
       } ]
     }, {
       type: 'option', key: "sub2-3", name: "Option 3", icon: <LaptopOutlined/>,
       pathname: "/sub2-option3", component: <Optional text="SUB2 OPTION3"/>
     } ]
   }, {
-    type: 'submenu', key: "sub3", name: "sub navigation 3", icon: <DesktopOutlined/>,
+    type: 'submenu', key: "sub3", name: "navigation 3", icon: <DesktopOutlined/>,
     subMenus: [ {
       type: 'option', key: "sub3-1", name: "Option 1", icon: <LaptopOutlined/>,
       pathname: "/sub3-option1", component: <Optional text="SUB3 OPTION1"/>
@@ -99,6 +99,7 @@ export const findSelectedMenuByPathname = (
           }
         }
     }
+    return undefined;
   }).filter(menu => menu);
   return selected.length ? selected[0] : undefined;
 };
