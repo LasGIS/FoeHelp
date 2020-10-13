@@ -13,8 +13,8 @@ import { findSelectedMenuByPathname, MENU_DATA, MenuData } from "./MenuHelper";
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
 
-/**  */
-const version = '1.0.0.2';
+/** Здесь указывается версия билда */
+const version = '1.0.0.3';
 
 const resolveSubmenu = (subMenus: MenuData[]) => {
   return subMenus.map((menu: MenuData) => {
@@ -67,14 +67,16 @@ const RESOLVED_ROUTES = resolveRoutes(MENU_DATA);
 function App() {
 
   const [ menuCollapsed, setMenuCollapsed ] = useState<boolean>(false);
-  const [ selectedKeys, setSelectedKeys ] = useState<string[]>(['']);
-  const [ breadcrumbs, setBreadcrumbs ] = useState<string[]>(['...']);
+  const [ selectedKeys, setSelectedKeys ] = useState<string[]>([ '' ]);
+  const [ breadcrumbs, setBreadcrumbs ] = useState<string[]>([ '...' ]);
 
   useEffect(() => {
     onSelectMenu();
   }, []);
 
   const onSelectMenu = () => {
+    const publicUrl = process.env.PUBLIC_URL;
+    console.log('process.env.PUBLIC_URL="' + publicUrl + '"');
     const selectedMenu = findSelectedMenuByPathname(window.location.pathname, MENU_DATA);
     setSelectedKeys([ selectedMenu ? selectedMenu.menu.key : '' ]);
     setBreadcrumbs(selectedMenu ? selectedMenu.breadcrumbs : [ '...' ]);
@@ -103,7 +105,7 @@ function App() {
       </Sider>
       <Layout style={{ padding: '0 12px' }}>
         <Breadcrumb style={{ margin: '6px 0' }}>
-          {breadcrumbs.map((crumb: string, index:number) => <Breadcrumb.Item key={index}>{crumb}</Breadcrumb.Item>)}
+          {breadcrumbs.map((crumb: string, index: number) => <Breadcrumb.Item key={index}>{crumb}</Breadcrumb.Item>)}
         </Breadcrumb>
         <Content className="site-layout-background">
           <Switch>

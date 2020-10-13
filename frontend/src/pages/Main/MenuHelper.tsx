@@ -53,7 +53,7 @@ export const MENU_DATA: MenuData[] = [
       subMenus: [ {
         type: 'option', key: "sub22-1", name: "Option 1", icon: <LaptopOutlined/>,
         pathname: "/sub22-option1", component: <Optional text="SUB2 SUB22 OPTION1"/>
-      },{
+      }, {
         type: 'option', key: "sub22-2", name: "Option 2", icon: <LaptopOutlined/>,
         pathname: "/sub22-option2", component: <Optional text="SUB2 SUB22 OPTION2"/>
       } ]
@@ -90,7 +90,7 @@ export const findSelectedMenuByPathname = (
         }
         break;
       case "option":
-        if (pathname.startsWith(menu.pathname)) {
+        if (pathname.startsWith(process.env.PUBLIC_URL + menu.pathname)) {
           const newBreadcrumbs: string[] = breadcrumbs ? breadcrumbs : [];
           newBreadcrumbs.push(menu.name);
           return {
