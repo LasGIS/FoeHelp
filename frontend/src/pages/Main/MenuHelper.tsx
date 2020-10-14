@@ -4,6 +4,7 @@ import Home from "../Home/Home";
 import Optional from "../Optional/Optional";
 import OptionalNotArg from "../Optional/OptionalNotArg";
 import ErasPage from "../Eras/Eras";
+import GreatBuildings from "../GreatBuildings/GreatBuildings";
 
 export type SubmenuData = {
   type: 'submenu';
@@ -41,7 +42,7 @@ export const MENU_DATA: MenuData[] = [
       pathname: "/eras", component: <ErasPage/>
     }, {
       type: 'option', key: "great_buildings", name: "Великие Строения", icon: <LaptopOutlined/>,
-      pathname: "/great-buildings", component: <Optional text="Great Buildings"/>
+      pathname: "/great-buildings", component: <GreatBuildings/>
     } ]
   }, {
     type: 'submenu', key: "sub2", name: "navigation 2", icon: <DesktopOutlined/>,
