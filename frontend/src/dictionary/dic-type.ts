@@ -66,6 +66,7 @@ export type PlaceType = {
 export type SkillType = "Товары гильдии" | "Производство монет";
 
 export type GreatBuildingType = {
+  id: number;
   /** Здание */
   name: string;
   /** Эпоха */

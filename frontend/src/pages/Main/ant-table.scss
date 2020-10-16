@@ -1,0 +1,9 @@
+td.ant-table-column-sort {
+  opacity: 1;
+  background: inherit;
+}
+
+.ant-table-tbody > tr.ant-table-row:hover > td {
+  opacity: 0.5;
+  background: #808080;
+}

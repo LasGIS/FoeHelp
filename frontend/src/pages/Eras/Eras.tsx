@@ -32,6 +32,7 @@ const ErasPage: React.FC = (props) => {
           color: era.color
         }
       })}
+      rowKey={(era: EraType) => era.key}
       pagination={false}
       size='small'
     />

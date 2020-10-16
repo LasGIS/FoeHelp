@@ -1,8 +1,6 @@
 import React from "react";
-import { DesktopOutlined, HomeOutlined, LaptopOutlined, UserOutlined } from "@ant-design/icons/lib/icons";
+import { DesktopOutlined, HomeOutlined, LaptopOutlined } from "@ant-design/icons/lib/icons";
 import Home from "../Home/Home";
-import Optional from "../Optional/Optional";
-import OptionalNotArg from "../Optional/OptionalNotArg";
 import ErasPage from "../Eras/Eras";
 import GreatBuildings from "../GreatBuildings/GreatBuildings";
 
@@ -41,38 +39,8 @@ export const MENU_DATA: MenuData[] = [
       type: 'option', key: "eras", name: "Эпохи", icon: <LaptopOutlined/>,
       pathname: "/eras", component: <ErasPage/>
     }, {
-      type: 'option', key: "great_buildings", name: "Великие Строения", icon: <LaptopOutlined/>,
+      type: 'option', key: "g-build", name: "Великие Строения", icon: <LaptopOutlined/>,
       pathname: "/great-buildings", component: <GreatBuildings/>
-    } ]
-  }, {
-    type: 'submenu', key: "sub2", name: "navigation 2", icon: <DesktopOutlined/>,
-    subMenus: [ {
-      type: 'option', key: "sub2-1", name: "Option 1", icon: <LaptopOutlined/>,
-      pathname: "/sub2-option1", component: <Optional text="SUB2 OPTION1"/>
-    }, {
-      type: 'submenu', key: "sub22", name: "navigation 22", icon: <DesktopOutlined/>,
-      subMenus: [ {
-        type: 'option', key: "sub22-1", name: "Option 1", icon: <LaptopOutlined/>,
-        pathname: "/sub22-option1", component: <Optional text="SUB2 SUB22 OPTION1"/>
-      }, {
-        type: 'option', key: "sub22-2", name: "Option 2", icon: <LaptopOutlined/>,
-        pathname: "/sub22-option2", component: <Optional text="SUB2 SUB22 OPTION2"/>
-      } ]
-    }, {
-      type: 'option', key: "sub2-3", name: "Option 3", icon: <LaptopOutlined/>,
-      pathname: "/sub2-option3", component: <Optional text="SUB2 OPTION3"/>
-    } ]
-  }, {
-    type: 'submenu', key: "sub3", name: "navigation 3", icon: <DesktopOutlined/>,
-    subMenus: [ {
-      type: 'option', key: "sub3-1", name: "Option 1", icon: <LaptopOutlined/>,
-      pathname: "/sub3-option1", component: <Optional text="SUB3 OPTION1"/>
-    }, {
-      type: 'option', key: "sub3-2", name: "Option 2", icon: <LaptopOutlined/>,
-      pathname: "/sub3-option2", component: <Optional text="SUB3 OPTION2"/>
-    }, {
-      type: 'option', key: "sub3-3", name: "OptionalNotArg", icon: <UserOutlined/>,
-      pathname: "/sub3-option3", component: <OptionalNotArg/>
     } ]
   }
 ];

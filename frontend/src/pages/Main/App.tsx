@@ -5,10 +5,13 @@
 import './App.scss';
 import React, { useEffect, useState } from 'react';
 import { Link, Route, Switch } from "react-router-dom";
-import { Breadcrumb, Layout, Menu } from 'antd';
+import { Breadcrumb, Layout, Menu, Spin } from 'antd';
 import classNames from 'classnames';
 import Home from "../Home/Home";
 import { findSelectedMenuByPathname, MENU_DATA, MenuData } from "./MenuHelper";
+import { RootStoreData } from "../../common/types/redux-types";
+import { commonHideLoader, commonShowLoader } from "../../common/services/action-creators";
+import { connect, ConnectedProps } from "react-redux";
 
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
@@ -64,7 +67,7 @@ const resolveRoutes = (subMenus: MenuData[]): any[] => {
 const RESOLVED_SUBMENUS = resolveSubmenu(MENU_DATA);
 const RESOLVED_ROUTES = resolveRoutes(MENU_DATA);
 
-function App() {
+const App: React.FC<PropsFromRedux> = (props) => {
 
   const [ menuCollapsed, setMenuCollapsed ] = useState<boolean>(false);
   const [ selectedKeys, setSelectedKeys ] = useState<string[]>([ '' ]);
@@ -75,49 +78,65 @@ function App() {
   }, []);
 
   const onSelectMenu = () => {
-    const publicUrl = process.env.PUBLIC_URL;
-    console.log('process.env.PUBLIC_URL="' + publicUrl + '"');
     const selectedMenu = findSelectedMenuByPathname(window.location.pathname, MENU_DATA);
     setSelectedKeys([ selectedMenu ? selectedMenu.menu.key : '' ]);
     setBreadcrumbs(selectedMenu ? selectedMenu.breadcrumbs : [ '...' ]);
   };
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sider
-        className="site-left-menu"
-        collapsible
-        collapsed={menuCollapsed}
-        onCollapse={(collapsed) => {
-          setMenuCollapsed(collapsed);
-        }}
-      >
-        <div className={classNames("logo", { "logo__short": menuCollapsed })}><span>Logo</span></div>
-        <Menu
-          mode="inline"
-          theme='dark'
-          selectedKeys={selectedKeys}
-          onSelect={onSelectMenu}
-          style={{ height: '100%' }}
+    <Spin spinning={props.loading} size="large" tip={"Загрузка данных"}>
+      <Layout className='app' >
+        <Sider
+          className="app__left-menu"
+          collapsible
+          collapsed={menuCollapsed}
+          onCollapse={(collapsed) => {
+            setMenuCollapsed(collapsed);
+          }}
         >
-          {RESOLVED_SUBMENUS}
-        </Menu>
-      </Sider>
-      <Layout style={{ padding: '0 12px' }}>
-        <Breadcrumb style={{ margin: '6px 0' }}>
-          {breadcrumbs.map((crumb: string, index: number) => <Breadcrumb.Item key={index}>{crumb}</Breadcrumb.Item>)}
-        </Breadcrumb>
-        <Content className="site-layout-background">
-          <Switch>
-            <Route key='zero' exact path="/" component={Home}/>
-            <Route key='home' path="/home" component={Home}/>
-            {RESOLVED_ROUTES}
-          </Switch>
-        </Content>
-        <Footer className='footer'>LasGIS ©2020 Created using Ant Design - version({version})</Footer>
+          <div className={classNames("app__left-menu__logo", { "app__left-menu__logo--short": menuCollapsed })}><span>Logo</span></div>
+          <Menu
+            mode="inline"
+            theme='dark'
+            selectedKeys={selectedKeys}
+            onSelect={onSelectMenu}
+            style={{ height: '100%' }}
+          >
+            {RESOLVED_SUBMENUS}
+          </Menu>
+        </Sider>
+        <Layout style={{ padding: '0 12px' }}>
+          <Breadcrumb style={{ margin: '6px 0' }}>
+            {breadcrumbs.map((crumb: string, index: number) => <Breadcrumb.Item key={index}>{crumb}</Breadcrumb.Item>)}
+          </Breadcrumb>
+          <Content className="app__content">
+            <Switch>
+              <Route key='zero' exact path="/" component={Home}/>
+              <Route key='home' path="/home" component={Home}/>
+              {RESOLVED_ROUTES}
+            </Switch>
+          </Content>
+          <Footer className='app__footer'>LasGIS ©2020 Created using Ant Design - version({version})</Footer>
+        </Layout>
       </Layout>
-    </Layout>
+    </Spin>
   );
-}
+};
 
-export default App;
+const mapState = (state: RootStoreData) => {
+  const { loading } = state.common;
+  return {
+    loading
+  };
+};
+
+const mapDispatch = {
+  commonShowLoader,
+  commonHideLoader
+};
+
+const connector = connect(mapState, mapDispatch);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+export default connector(App);
