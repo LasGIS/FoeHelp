@@ -61,19 +61,64 @@ export type PlaceType = {
   /** сверху вправо \ */
   y: number;
   /** число клеток дороги */
-  board: 0 | 1 | 2;
+  b: 0 | 1 | 2;
 }
-export type SkillType = "Товары гильдии" | "Производство монет";
+export type ImageType = string;
 
-export type GreatBuildingType = {
-  id: number;
-  /** Здание */
+export type BuildingType = {
+  /** url картинки */
+  image?: ImageType;
+  /** Название */
   name: string;
   /** Эпоха */
   era: EraKey;
   /** Место */
   place?: PlaceType;
+};
+
+export type SkillKindType =
+  'guild_goods'
+  | 'defence'
+  | 'relic_hunt'
+  | 'supplies'
+  | 'happy'
+  | 'goods'
+  | 'population'
+  | 'military'
+  | 'medals'
+  | 'supplies_plus'
+  | 'forge_points'
+  | 'coins'
+  | 'fierce_resistance'
+  | 'scroll'
+  | 'penal_unit'
+  | 'plunder_goods'
+  | 'aid_goods'
+  | 'contribution_boost'
+  | 'aid_blueprints'
+  | 'helping_hands'
+  | 'critical_hit_chance'
+  | 'plunder_and_pillage'
+  | 'first_strike'
+  | 'double_collect'
+  | 'advanced_tactics'
+  | 'spoils_of_war'
+  | 'previous_era_good_production'
+  | 'missile_launch'
+  | 'special_goods'
+  | 'diplomatic_gifts'
+;
+
+export type SkillType = {
+  kind: SkillKindType;
+  name: string;
+  definition?: string;
+  image?: ImageType;
+};
+
+export type GreatBuildingType = BuildingType & {
+  id: number;
   /** Умения */
   skills?: SkillType[];
-};
+}
 
