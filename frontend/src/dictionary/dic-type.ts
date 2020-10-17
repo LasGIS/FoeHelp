@@ -110,10 +110,10 @@ export type SkillKindType =
 ;
 
 export type SkillType = {
-  kind: SkillKindType;
+  id: SkillKindType;
   name: string;
   definition?: string;
-  image?: ImageType;
+  image: ImageType;
 };
 
 export type GreatBuildingType = BuildingType & {

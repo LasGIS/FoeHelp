@@ -1,0 +1,32 @@
+@import "src/css/constants";
+
+td.ant-table-column-sort {
+  opacity: 1;
+  background: inherit;
+}
+
+.ant-table-tbody > tr.ant-table-row:hover > td {
+  opacity: 0.5;
+  background: #808080;
+}
+
+.ant-table-thead th.ant-table-column-has-sorters:hover {
+  background: rgba($ant-table-thead-background-color, 0.5);
+}
+
+.ant-table {
+  color: $ant-table-tbody-color;
+  background-color: $ant-table-tbody-background-color;
+}
+
+.ant-table-small .ant-table-thead > tr > th {
+  color: $ant-table-thead-color;
+  background-color: $ant-table-thead-background-color;
+  font-weight: bold;
+}
+
+.ant-table-thead > tr > th {
+  color: $ant-table-thead-color;
+  font-weight: bold;
+  background-color: $ant-table-thead-background-color;
+}

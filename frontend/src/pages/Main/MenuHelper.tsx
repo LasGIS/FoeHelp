@@ -1,8 +1,9 @@
 import React from "react";
 import { DesktopOutlined, HomeOutlined, LaptopOutlined } from "@ant-design/icons/lib/icons";
 import Home from "../Home/Home";
-import ErasPage from "../Eras/Eras";
-import GreatBuildings from "../GreatBuildings/GreatBuildings";
+import ErasPage from "../Eras/ErasPage";
+import GreatBuildingsPage from "../GreatBuildings/GreatBuildingsPage";
+import SkillsPage from "../Skills/SkillsPage";
 
 export type SubmenuData = {
   type: 'submenu';
@@ -40,7 +41,10 @@ export const MENU_DATA: MenuData[] = [
       pathname: "/eras", component: <ErasPage/>
     }, {
       type: 'option', key: "g-build", name: "Великие Строения", icon: <LaptopOutlined/>,
-      pathname: "/great-buildings", component: <GreatBuildings/>
+      pathname: "/great-buildings", component: <GreatBuildingsPage/>
+    }, {
+      type: 'option', key: "gb-skills", name: "Усиления Великих Строений", icon: <LaptopOutlined/>,
+      pathname: "/great-building-skills", component: <SkillsPage/>
     } ]
   }
 ];

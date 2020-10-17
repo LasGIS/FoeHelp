@@ -3,94 +3,94 @@ import { GreatBuildingType, SkillType } from "./dic-type";
 
 export const SKILLS: SkillType[] = [
   {
-    kind: 'guild_goods', name: 'Товары гильдии',
+    id: 'guild_goods', name: 'Товары гильдии',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_guild_goods.png',
   }, {
-    kind: 'defence', name: 'Бонус резерва',
+    id: 'defence', name: 'Бонус резерва',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_defence.png',
   }, {
-    kind: 'relic_hunt', name: 'Охота за реликвиями',
+    id: 'relic_hunt', name: 'Охота за реликвиями',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_relic_hunt.png',
   }, {
-    kind: 'supplies', name: 'Производство ресурсов',
+    id: 'supplies', name: 'Производство ресурсов',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_supplies.png',
   }, {
-    kind: 'happy', name: 'Уровень счастья',
+    id: 'happy', name: 'Уровень счастья',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_happy.png',
   }, {
-    kind: 'goods', name: 'Производство товаров',
+    id: 'goods', name: 'Производство товаров',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_goods.png',
   }, {
-    kind: 'population', name: 'Население',
+    id: 'population', name: 'Население', definition: "Обеспечивает следующий ресурс: Население.",
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_population.png',
   }, {
-    kind: 'military', name: 'Неистовство',
+    id: 'military', name: 'Неистовство',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_military.png',
   }, {
-    kind: 'medals', name: 'Производство медалей',
+    id: 'medals', name: 'Производство медалей',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_medals.png',
   }, {
-    kind: 'supplies_plus', name: 'Изобилие',
+    id: 'supplies_plus', name: 'Изобилие',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_supplies.png',
   }, {
-    kind: 'forge_points', name: 'Исследования',
+    id: 'forge_points', name: 'Исследования',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_forgepoints.png',
   }, {
-    kind: 'coins', name: 'Производство монет',
+    id: 'coins', name: 'Производство монет',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_coins.png',
   }, {
-    kind: 'fierce_resistance', name: 'Жестокое сопротивление',
+    id: 'fierce_resistance', name: 'Жестокое сопротивление',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_fierce_resistance.png',
   }, {
-    kind: 'scroll', name: 'Квест-бонус',
+    id: 'scroll', name: 'Квест-бонус',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_scroll.png',
   }, {
-    kind: 'penal_unit', name: 'Карательный юнит',
+    id: 'penal_unit', name: 'Карательный юнит',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_penal_unit.png',
   }, {
-    kind: 'plunder_goods', name: 'Товары за грабёж',
+    id: 'plunder_goods', name: 'Товары за грабёж',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_plunder_goods.png',
   }, {
-    kind: 'aid_goods', name: 'Товары за помощь',
+    id: 'aid_goods', name: 'Товары за помощь',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_aid_goods.png',
   }, {
-    kind: 'contribution_boost', name: 'Приз за сотрудничество',
+    id: 'contribution_boost', name: 'Приз за сотрудничество',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_contribution_boost.png',
   }, {
-    kind: 'aid_blueprints', name: 'Чертежи за помощь',
+    id: 'aid_blueprints', name: 'Чертежи за помощь',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_aid_blueprints.png',
   }, {
-    kind: 'helping_hands', name: 'Рука помощи',
+    id: 'helping_hands', name: 'Рука помощи',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_helping_hands.png',
   }, {
-    kind: 'critical_hit_chance', name: 'Критический удар',
+    id: 'critical_hit_chance', name: 'Критический удар',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_critical_hit_chance.png',
   }, {
-    kind: 'plunder_and_pillage', name: 'Грабёж и мародёрство',
+    id: 'plunder_and_pillage', name: 'Грабёж и мародёрство',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_plunder_and_pillage.png',
   }, {
-    kind: 'first_strike', name: 'Первый удар',
+    id: 'first_strike', name: 'Первый удар',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_first_strike.png',
   }, {
-    kind: 'double_collect', name: 'Двойная коллекция',
+    id: 'double_collect', name: 'Двойная коллекция',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_double_collect.png',
   }, {
-    kind: 'advanced_tactics', name: 'Улучшенная тактика',
+    id: 'advanced_tactics', name: 'Улучшенная тактика',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_advanced_tactics.png',
   }, {
-    kind: 'spoils_of_war', name: 'Военные трофеи',
+    id: 'spoils_of_war', name: 'Военные трофеи',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_spoils_of_war.png',
   }, {
-    kind: 'previous_era_good_production', name: 'Производство товаров предыдущей эпохи',
+    id: 'previous_era_good_production', name: 'Производство товаров предыдущей эпохи',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_previous_era_good_production.png',
   }, {
-    kind: 'missile_launch', name: 'Запуск ракеты',
+    id: 'missile_launch', name: 'Запуск ракеты',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_missile_launch.png',
   }, {
-    kind: 'special_goods', name: 'Орбитальный транспорт',
+    id: 'special_goods', name: 'Орбитальный транспорт',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_special_goods.png',
   }, {
-    kind: 'diplomatic_gifts', name: 'Дипломатические дары',
+    id: 'diplomatic_gifts', name: 'Дипломатические дары',
     image: 'https://foeru.innogamescdn.com/assets/shared/icons/icon_great_building_bonus_diplomatic_gifts.png',
   }
 ];

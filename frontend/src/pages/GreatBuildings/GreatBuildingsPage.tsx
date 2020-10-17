@@ -8,7 +8,7 @@ import { commonHideLoader, commonShowLoader } from "../../common/services/action
 import { connect, ConnectedProps } from "react-redux";
 import { ERA_KEY_MAP } from "../../dictionary/eras";
 
-class GreatBuildings extends React.Component<PropsFromRedux> {
+class GreatBuildingsPage extends React.Component<PropsFromRedux> {
 
   render() {
     return (
@@ -67,4 +67,4 @@ const connector = connect(mapState, mapDispatch);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export default connector(GreatBuildings);
+export default connector(GreatBuildingsPage);
