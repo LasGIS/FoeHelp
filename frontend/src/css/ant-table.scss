@@ -30,3 +30,11 @@ td.ant-table-column-sort {
   font-weight: bold;
   background-color: $ant-table-thead-background-color;
 }
+
+.gray_button_link {
+  color: $gray-button-link-color;
+
+  &:hover, &:focus {
+    color: $gray-button-link-color;
+  }
+}

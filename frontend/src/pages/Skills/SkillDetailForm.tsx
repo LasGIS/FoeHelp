@@ -2,9 +2,10 @@
  * Copyright 2020 LasGIS FOE Helper
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { SkillType } from "../../dictionary/dic-type";
-import { Form, Input } from "antd";
+import { Button, Form, Input, Row } from "antd";
+import TextArea from "antd/es/input/TextArea";
 
 type Props = {
   isExist: boolean,
@@ -20,30 +21,75 @@ export const SkillDetailForm = ({ isExist, editSkill, onSave, onClose }: Props) 
   useEffect(() => {
     if (editSkill) {
       const fieldsSkill = {
-        id: editSkill.id
+        id: editSkill.id,
+        name: editSkill.name,
+        definition: editSkill.definition,
+        image: editSkill.image
       };
       form.setFieldsValue(fieldsSkill);
     }
-  },[form, editSkill]);
+  }, [ form, editSkill ]);
+
+  const handleSubmit = () => {
+    form.validateFields()
+      .then(values => {
+        if (editSkill) {
+
+          const skill: SkillType = {
+            ...editSkill,
+            id: values.id,
+            name: values.name,
+            definition: values.definition,
+            image: values.image
+          };
+          onSave(skill);
+        }
+      });
+  };
 
   const layout = {
     labelCol: { span: 7 },
     wrapperCol: { span: 17 },
   };
 
+  const handleClose = () => {
+    onClose();
+  };
+
   return (
     <Form {...layout} form={form}>
       <Form.Item
-        name="id" label="Название (ID)"
+        name="id" label="ID"
         rules={[ {
           required: true,
-          message: 'Название (ID) группы обязательно!',
+          message: 'ID обязательно!',
         }, {
-          pattern: /^([A-Z0-9]+[-_])*[A-Z0-9]+$/,
-          message: 'Название/ID группы состоит из LAT в верхнем регистре, разделенных "-" или "_"',
+          pattern: /^([a-z0-9]+[_])*[a-z0-9]+$/,
+          message: 'ID состоит из LAT в нижнем регистре, разделенных "_"',
         } ]}>
         <Input disabled={isExist}/>
       </Form.Item>
+      <Form.Item
+        name="name" label="Название"
+        rules={[ { required: true } ]}>
+        <Input/>
+      </Form.Item>
+      <Form.Item name="definition" label="Описание">
+        <TextArea/>
+      </Form.Item>
+      <Form.Item name="image" label="Картинка (URL)">
+        <Input/>
+      </Form.Item>
+      <Row justify="center">
+        <Form.Item noStyle>
+          <Button type="primary" htmlType="submit" onClick={handleSubmit}>
+            Сохранить
+          </Button>
+          <Button style={{ marginLeft: 8 }} htmlType="reset" onClick={handleClose}>
+            Закрыть
+          </Button>
+        </Form.Item>
+      </Row>
     </Form>
   );
 }

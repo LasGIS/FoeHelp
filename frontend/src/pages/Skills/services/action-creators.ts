@@ -16,7 +16,7 @@ export const setSkillSearchValue = (searchValue: string) => ({ type: SKILLS_SEAR
 
 export const editNewSkill = (editSkill: SkillType) => ({ type: SKILLS_EDIT_NEW_SKILL, editSkill } as const);
 
-export const editSkillByIp = (id: SkillKindType) => ({ type: SKILLS_EDIT_SKILL_BY_IP, id } as const);
+export const editSkillById = (id: SkillKindType) => ({ type: SKILLS_EDIT_SKILL_BY_IP, id } as const);
 
 export const insertSkill = (skill: SkillType) => ({ type: SKILLS_INSERT_SKILL, skill } as const);
 

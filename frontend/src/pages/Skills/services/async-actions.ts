@@ -1,11 +1,11 @@
-import { editNewSkill, editSkillByIp, editSkillShow, setIsNewSkill, } from './action-creators';
+import { editNewSkill, editSkillById, editSkillShow, setIsNewSkill, } from './action-creators';
 import { SkillsActions } from "./types";
 import { SkillKindType, SkillType } from "../../../dictionary/dic-type";
 
 type SkillsServiceDispatch = (arg: SkillsActions) => SkillsActions;
 
 export const getSkillByIp = (id: SkillKindType) => (dispatch: SkillsServiceDispatch) => {
-  dispatch(editSkillByIp(id));
+  dispatch(editSkillById(id));
   dispatch(setIsNewSkill(false));
   dispatch(editSkillShow(true));
 };

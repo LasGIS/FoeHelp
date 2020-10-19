@@ -1,13 +1,13 @@
 import React from "react";
-import { Modal, Table } from "antd";
-import { SkillType } from "../../dictionary/dic-type";
+import { Button, Modal, Table, Tooltip } from "antd";
+import { SkillKindType, SkillType } from "../../dictionary/dic-type";
 import { compareAlphabetically } from "../../utils";
 import { RootStoreData } from "../../common/types/redux-types";
 import { connect, ConnectedProps } from "react-redux";
 import {
   deleteSkillByIp,
   editNewSkill,
-  editSkillByIp,
+  editSkillById,
   editSkillShow,
   insertSkill,
   setIsNewSkill,
@@ -17,7 +17,10 @@ import {
 import { SkillDetailForm } from "./SkillDetailForm";
 
 class SkillsPage extends React.Component<PropsFromRedux> {
-
+  editRecord = (id: SkillKindType) => {
+    const { editSkillById } = this.props;
+    editSkillById(id)
+  };
   saveDetail = (skill: SkillType) => {
     const { isNewSkill, updateSkill, insertSkill } = this.props;
     isNewSkill ? insertSkill(skill) : updateSkill(skill);
@@ -39,9 +42,17 @@ class SkillsPage extends React.Component<PropsFromRedux> {
           columns={[ {
             title: '№',
             dataIndex: 'id',
-            width: '250px',
+            width: '150px',
             sorter: (a: SkillType, b: SkillType) => compareAlphabetically(a.id, b.id),
-            render: (id: string, skill: SkillType) => <><img src={skill.image} width='25px' alt={skill.image} className="skill-image"/>{id}</>,
+            render: (id: string, skill: SkillType) => (
+              <Tooltip placement="topLeft" title={`Редактировать умение "${skill.name}"`}>
+                <Button
+                  type='link' className='gray_button_link'
+                  icon={<img src={skill.image} width='25px' alt={skill.image} className="skill-image"/>}
+                  onClick={() => this.editRecord(skill.id)}
+                >{id}</Button>
+              </Tooltip>
+            )
           }, {
             title: 'Название',
             dataIndex: 'name',
@@ -57,7 +68,7 @@ class SkillsPage extends React.Component<PropsFromRedux> {
           size='small'
         />
         <Modal
-          title={`Детали Host ${editSkill}`}
+          title={`Детали Host ${editSkill?.name}`}
           visible={isEditSkillShow}
           onCancel={this.detailClose}
           footer={false}
@@ -89,7 +100,7 @@ const mapState = (state: RootStoreData) => {
 };
 
 const mapDispatch = {
-  editSkillShow, setIsNewSkill, setSkillSearchValue, editNewSkill, editSkillByIp, insertSkill, updateSkill, deleteSkillByIp
+  editSkillShow, setIsNewSkill, setSkillSearchValue, editNewSkill, editSkillById, insertSkill, updateSkill, deleteSkillByIp
 };
 
 const connector = connect(mapState, mapDispatch);
