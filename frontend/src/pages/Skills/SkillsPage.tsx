@@ -1,7 +1,8 @@
 import React from "react";
-import { Button, Modal, Table, Tooltip } from "antd";
-import { SkillKindType, SkillType } from "../../dictionary/dic-type";
-import { compareAlphabetically } from "../../utils";
+import { Button, Modal, Row, Table, Tooltip } from "antd";
+import { DownloadOutlined, PlusOutlined } from "@ant-design/icons/lib/icons";
+import { SkillKind, SkillType } from "../../dictionary/dic-type";
+import { compareAlphabetically, downloadToFile } from "../../utils";
 import { RootStoreData } from "../../common/types/redux-types";
 import { connect, ConnectedProps } from "react-redux";
 import {
@@ -15,15 +16,23 @@ import {
   updateSkill
 } from "./services/action-creators";
 import { SkillDetailForm } from "./SkillDetailForm";
+import SearchInputWithDelay from "../../components/SearchInputWithDelay";
 
 class SkillsPage extends React.Component<PropsFromRedux> {
-  editRecord = (id: SkillKindType) => {
+
+  editRecord = (id: SkillKind) => {
     const { editSkillById } = this.props;
     editSkillById(id)
   };
+
   saveDetail = (skill: SkillType) => {
     const { isNewSkill, updateSkill, insertSkill } = this.props;
     isNewSkill ? insertSkill(skill) : updateSkill(skill);
+  };
+
+  createNewSkill = () => {
+    const { editNewSkill } = this.props;
+    editNewSkill();
   };
 
   detailClose = () => {
@@ -31,36 +40,73 @@ class SkillsPage extends React.Component<PropsFromRedux> {
     editSkillShow(false);
   };
 
+  saveAll2File = () => {
+    const { skillList } = this.props;
+    downloadToFile(skillList, 'skills.ts', 'text/plain',
+      "import { SkillType } from \"./dic-type\";\n\nexport const SKILLS: SkillType[] = ", ";\n");
+  }
+
+  setSearchValue = (searchValue: string) => {
+    const { setSkillSearchValue } = this.props;
+    setSkillSearchValue(searchValue)
+  };
+
   render() {
     const {
-      skillList, editSkill, isEditSkillShow, isNewSkill,
+      searchValue, skillList, editSkill, isEditSkillShow, isNewSkill
     } = this.props;
     return (
       <>
+        <Row style={{ marginBottom: '5px' }}>
+          <Button
+            type="primary"
+            icon={<DownloadOutlined/>}
+            onClick={this.saveAll2File}
+          >
+            Сохранить как Файл
+          </Button>
+          <div style={{ flex: "auto" }}/>
+          <Button
+            style={{ alignItems: "end" }}
+            type="link"
+            icon={<PlusOutlined/>}
+            onClick={this.createNewSkill}
+          >
+            Добавить Connectivity
+          </Button>
+        </Row>
+        <SearchInputWithDelay
+          value={searchValue}
+          onChange={this.setSearchValue}
+          placeholder="Начните набирать значение любого из полей"
+        />
         <Table
           dataSource={skillList}
           columns={[ {
             title: '№',
             dataIndex: 'id',
-            width: '150px',
+            ellipsis: true,
+            width: '200px',
             sorter: (a: SkillType, b: SkillType) => compareAlphabetically(a.id, b.id),
-            render: (id: string, skill: SkillType) => (
+          }, {
+            title: 'Название',
+            dataIndex: 'name',
+            ellipsis: true,
+            width: '300px',
+            sorter: (a: SkillType, b: SkillType) => compareAlphabetically(a.name, b.name),
+            render: (name: string, skill: SkillType) => (
               <Tooltip placement="topLeft" title={`Редактировать умение "${skill.name}"`}>
                 <Button
                   type='link' className='gray_button_link'
                   icon={<img src={skill.image} width='25px' alt={skill.image} className="skill-image"/>}
                   onClick={() => this.editRecord(skill.id)}
-                >{id}</Button>
+                >{name}</Button>
               </Tooltip>
             )
           }, {
-            title: 'Название',
-            dataIndex: 'name',
-            width: '300px',
-            sorter: (a: SkillType, b: SkillType) => compareAlphabetically(a.name, b.name),
-          }, {
             title: 'Описание',
             dataIndex: 'definition',
+            ellipsis: true
           } ]}
           bordered
           rowKey={(gb: SkillType) => gb.id}
@@ -90,8 +136,9 @@ class SkillsPage extends React.Component<PropsFromRedux> {
 }
 
 const mapState = (state: RootStoreData) => {
-  const { skillList, editSkill, isEditSkillShow, isNewSkill } = state.skills;
+  const { searchValue, skillList, editSkill, isEditSkillShow, isNewSkill } = state.skills;
   return {
+    searchValue,
     skillList,
     editSkill,
     isEditSkillShow,

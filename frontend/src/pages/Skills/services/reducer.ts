@@ -9,7 +9,7 @@ import {
   SKILLS_UPDATE_SKILL
 } from './action-constants';
 import { SkillsActions, SkillsStoreData } from './types';
-import { SKILLS } from "../../../dictionary/great-buildings";
+import { SKILLS } from "../../../dictionary/skills";
 import { SkillType } from "../../../dictionary/dic-type";
 
 const initialState: SkillsStoreData = {
@@ -32,7 +32,7 @@ export function skillsReducer(state: SkillsStoreData = initialState, action: Ski
     case SKILLS_EDIT_NEW_SKILL:
       return {
         ...state,
-        editSkill: action.editSkill,
+        editSkill: undefined,
         isEditSkillShow: true,
         isNewSkill: true,
       };

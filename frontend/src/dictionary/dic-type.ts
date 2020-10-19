@@ -76,7 +76,7 @@ export type BuildingType = {
   place?: PlaceType;
 };
 
-export type SkillKindType =
+export type SkillKind =
   'guild_goods'
   | 'defence'
   | 'relic_hunt'
@@ -89,6 +89,7 @@ export type SkillKindType =
   | 'supplies_plus'
   | 'forge_points'
   | 'coins'
+  | 'coins_plus'
   | 'fierce_resistance'
   | 'scroll'
   | 'penal_unit'
@@ -107,13 +108,13 @@ export type SkillKindType =
   | 'missile_launch'
   | 'special_goods'
   | 'diplomatic_gifts'
-;
+  ;
 
 export type SkillType = {
-  id: SkillKindType;
+  id: SkillKind;
   name: string;
   definition?: string;
-  image: ImageType;
+  image?: ImageType;
 };
 
 export type GreatBuildingType = BuildingType & {

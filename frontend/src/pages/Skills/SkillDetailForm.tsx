@@ -33,17 +33,14 @@ export const SkillDetailForm = ({ isExist, editSkill, onSave, onClose }: Props) 
   const handleSubmit = () => {
     form.validateFields()
       .then(values => {
-        if (editSkill) {
-
-          const skill: SkillType = {
-            ...editSkill,
-            id: values.id,
-            name: values.name,
-            definition: values.definition,
-            image: values.image
-          };
-          onSave(skill);
-        }
+        const skill: SkillType = {
+          ...editSkill,
+          id: values.id,
+          name: values.name,
+          definition: values.definition,
+          image: values.image
+        };
+        onSave(skill);
       });
   };
 
