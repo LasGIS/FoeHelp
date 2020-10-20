@@ -40,7 +40,7 @@ class SkillsPage extends React.Component<PropsFromRedux> {
     editSkillShow(false);
   };
 
-  saveAll2File = () => {
+  saveToFile = () => {
     const { skillList } = this.props;
     downloadToFile(skillList, 'skills.ts', 'text/plain',
       "import { SkillType } from \"./dic-type\";\n\nexport const SKILLS: SkillType[] = ", ";\n");
@@ -61,7 +61,7 @@ class SkillsPage extends React.Component<PropsFromRedux> {
           <Button
             type="primary"
             icon={<DownloadOutlined/>}
-            onClick={this.saveAll2File}
+            onClick={this.saveToFile}
           >
             Сохранить как Файл
           </Button>
@@ -147,7 +147,14 @@ const mapState = (state: RootStoreData) => {
 };
 
 const mapDispatch = {
-  editSkillShow, setIsNewSkill, setSkillSearchValue, editNewSkill, editSkillById, insertSkill, updateSkill, deleteSkillByIp
+  editSkillShow,
+  setIsNewSkill,
+  setSkillSearchValue,
+  editNewSkill,
+  editSkillById,
+  insertSkill,
+  updateSkill,
+  deleteSkillByIp
 };
 
 const connector = connect(mapState, mapDispatch);

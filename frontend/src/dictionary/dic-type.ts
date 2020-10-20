@@ -70,6 +70,8 @@ export type BuildingType = {
   image?: ImageType;
   /** Название */
   name: string;
+  /** Описание */
+  definition?: string;
   /** Эпоха */
   era: EraKey;
   /** Место */
