@@ -53,7 +53,7 @@ class GreatBuildingsPage extends React.Component<PropsFromRedux> {
   }
 
   render() {
-    const { greatBuildingList, editGreatBuilding, isEditGreatBuildingShow, isNewGreatBuilding } = this.props;
+    const { greatBuildingList, editGreatBuilding, isEditGreatBuildingShow, isNewGreatBuilding, skillList } = this.props;
     return (
       <>
         <Row style={{ marginBottom: '5px' }}>
@@ -130,6 +130,7 @@ class GreatBuildingsPage extends React.Component<PropsFromRedux> {
         >
           <GreatBuildingDetailForm
             isExist={!isNewGreatBuilding}
+            skills={skillList}
             editGreatBuilding={editGreatBuilding}
             onSave={this.saveDetail}
             onClose={this.detailClose}
@@ -142,11 +143,13 @@ class GreatBuildingsPage extends React.Component<PropsFromRedux> {
 
 const mapState = (state: RootStoreData) => {
   const { greatBuildingList, editGreatBuilding, isEditGreatBuildingShow, isNewGreatBuilding } = state.greatBuilds;
+  const { skillList } = state.skills;
   return {
     greatBuildingList,
     editGreatBuilding,
     isEditGreatBuildingShow,
-    isNewGreatBuilding
+    isNewGreatBuilding,
+    skillList
   };
 };
 

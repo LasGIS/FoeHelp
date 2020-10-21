@@ -3,18 +3,22 @@
  */
 
 import React, { useEffect } from 'react';
-import { GreatBuildingType, PlaceType } from "../../dictionary/dic-type";
-import { Button, Form, Input, Row } from "antd";
+import { GreatBuildingType, PlaceType, SkillType } from "../../dictionary/dic-type";
+import { Button, Form, Input, Row, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
+import { ERAS } from "../../dictionary/eras";
+
+const { Option } = Select;
 
 type Props = {
-  isExist: boolean,
+  skills: SkillType[];
+  isExist: boolean;
   editGreatBuilding?: GreatBuildingType;
   onSave: (build: GreatBuildingType) => any;
   onClose: () => any;
 };
 
-export const GreatBuildingDetailForm = ({ isExist, editGreatBuilding, onSave, onClose }: Props) => {
+export const GreatBuildingDetailForm = ({ skills, isExist, editGreatBuilding, onSave, onClose }: Props) => {
 
   const [ form ] = Form.useForm();
 
@@ -26,6 +30,7 @@ export const GreatBuildingDetailForm = ({ isExist, editGreatBuilding, onSave, on
         definition: editGreatBuilding.definition,
         image: editGreatBuilding.image,
         era: editGreatBuilding.era,
+        skills: editGreatBuilding.skills?.map(skill => skill.id),
         place_x: editGreatBuilding.place?.x,
         place_y: editGreatBuilding.place?.y,
         place_b: editGreatBuilding.place?.b,
@@ -51,7 +56,8 @@ export const GreatBuildingDetailForm = ({ isExist, editGreatBuilding, onSave, on
           definition: values.definition,
           image: values.image,
           era: values.era,
-//          place: place,
+          skills: skills.filter(skill => values.skills.includes(skill.id)),
+          place: place,
         };
         onSave(build);
       });
@@ -85,9 +91,38 @@ export const GreatBuildingDetailForm = ({ isExist, editGreatBuilding, onSave, on
         <Input/>
       </Form.Item>
       <Form.Item
-        name="era" label="Эра"
+        name="era" label="Эра / Эпоха"
         rules={[ { required: true } ]}>
-        <Input/>
+        <Select
+          placeholder={"Выберите эпоху"} showSearch
+          filterOption={(input, option) => {
+            const label: string = (option && option.label && typeof(option.label) === 'string') ? option.label : '';
+            return Boolean(label.toLowerCase().indexOf(input.toLowerCase()) >= 0)
+          }}
+        >
+          {ERAS.map((era, index) => (
+            <Option key={`era_id_option_${index}`} value={era.key} label={era.name}>
+              <div style={{
+                background: era.background,
+                /*borderColor: era.borderColor,*/
+                color: era.color
+              }}>{era.name}</div>
+            </Option>
+          ))}
+        </Select>
+      </Form.Item>
+      <Form.Item
+        name="skills" label="Усиление ВC"
+        rules={[ { required: true } ]}>
+        <Select mode='multiple' placeholder={"добавьте усиление"} showSearch filterOption={(input, option) => {
+          return Boolean(option && option.children[1].toLowerCase().indexOf(input.toLowerCase()) >= 0)
+        }}>
+          {skills?.map((skill, index) => (
+            <Option key={`skill_id_option_${index}`} value={skill.id}>
+              <img src={skill.image} width='25px' alt={skill.image} className="skill-image"/>{skill.name}
+            </Option>
+          ))}
+        </Select>
       </Form.Item>
       <Form.Item name="definition" label="Описание">
         <TextArea/>

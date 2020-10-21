@@ -109,8 +109,7 @@ export type SkillKind =
   | 'previous_era_good_production'
   | 'missile_launch'
   | 'special_goods'
-  | 'diplomatic_gifts'
-  ;
+  | 'diplomatic_gifts';
 
 export type SkillType = {
   id: SkillKind;

@@ -114,7 +114,7 @@ class SkillsPage extends React.Component<PropsFromRedux> {
           size='small'
         />
         <Modal
-          title={`Детали Host ${editSkill?.name}`}
+          title={`Усиление Великих Cтроений ${editSkill?.name}`}
           visible={isEditSkillShow}
           onCancel={this.detailClose}
           footer={false}
