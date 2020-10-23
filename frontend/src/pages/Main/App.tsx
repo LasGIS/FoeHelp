@@ -94,7 +94,7 @@ const App: React.FC<PropsFromRedux> = (props) => {
             setMenuCollapsed(collapsed);
           }}
         >
-          <div className={classNames("app__left-menu__logo", { "app__left-menu__logo--short": menuCollapsed })}><span>Logo</span></div>
+          <div className={classNames("app__left-menu__logo", { "app__left-menu__logo--short": menuCollapsed })}><span>FoeHelp</span></div>
           <Menu
             mode="inline"
             theme='dark'

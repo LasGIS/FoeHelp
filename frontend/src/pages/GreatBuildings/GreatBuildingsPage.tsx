@@ -106,6 +106,7 @@ class GreatBuildingsPage extends React.Component<PropsFromRedux> {
           } ]}
           bordered
           rowKey={(gb: GreatBuildingType) => gb.id}
+/*
           onRow={(gb: GreatBuildingType) => {
             const era: EraType = ERA_KEY_MAP[gb.era];
             return ({
@@ -116,6 +117,7 @@ class GreatBuildingsPage extends React.Component<PropsFromRedux> {
               }
             });
           }}
+*/
           pagination={false}
           size='small'
         />

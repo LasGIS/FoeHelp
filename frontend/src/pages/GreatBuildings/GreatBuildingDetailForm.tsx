@@ -94,7 +94,7 @@ export const GreatBuildingDetailForm = ({ skills, isExist, editGreatBuilding, on
         name="era" label="Эра / Эпоха"
         rules={[ { required: true } ]}>
         <Select
-          placeholder={"Выберите эпоху"} showSearch
+          placeholder={"Выберите эпоху"} showSearch optionLabelProp='label'
           filterOption={(input, option) => {
             const label: string = (option && option.label && typeof(option.label) === 'string') ? option.label : '';
             return Boolean(label.toLowerCase().indexOf(input.toLowerCase()) >= 0)
@@ -103,8 +103,9 @@ export const GreatBuildingDetailForm = ({ skills, isExist, editGreatBuilding, on
           {ERAS.map((era, index) => (
             <Option key={`era_id_option_${index}`} value={era.key} label={era.name}>
               <div style={{
+                padding: "0 11px",
                 background: era.background,
-                /*borderColor: era.borderColor,*/
+                borderColor: era.borderColor,
                 color: era.color
               }}>{era.name}</div>
             </Option>
