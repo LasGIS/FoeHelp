@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Modal, Row, Table, Tooltip } from "antd";
 import { compareAlphabetically, compareNumber, downloadToFile } from "../../utils";
-import { EraKey, EraType, GreatBuildingType } from "../../dictionary/dic-type";
+import { EraType, GreatBuildingType, PlaceType, SkillType } from "../../dictionary/dic-type";
 import { RootStoreData } from "../../common/types/redux-types";
 import { connect, ConnectedProps } from "react-redux";
 import { ERA_KEY_MAP } from "../../dictionary/eras";
@@ -80,10 +80,10 @@ class GreatBuildingsPage extends React.Component<PropsFromRedux> {
             title: '№',
             dataIndex: 'id',
             ellipsis: true,
-            width: '20px',
+            width: '50px',
             sorter: (a: GreatBuildingType, b: GreatBuildingType) => compareNumber(a.id, b.id),
           }, {
-            title: 'Название',
+            title: 'Здание',
             dataIndex: 'name',
             ellipsis: true,
             width: '300px',
@@ -92,6 +92,7 @@ class GreatBuildingsPage extends React.Component<PropsFromRedux> {
               <Tooltip placement="topLeft" title={`Редактировать строение "${build.name}"`}>
                 <Button
                   type='link'
+                  className='era-button'
                   icon={<img src={build.image} width='25px' alt={build.image} className="skill-image"/>}
                   onClick={() => this.editRecord(build.id)}
                 >{name}</Button>
@@ -100,30 +101,44 @@ class GreatBuildingsPage extends React.Component<PropsFromRedux> {
           }, {
             title: 'Эра',
             dataIndex: 'era',
-            width: '200px',
+            width: '250px',
             sorter: (a: GreatBuildingType, b: GreatBuildingType) => compareAlphabetically(ERA_KEY_MAP[a.era].name, ERA_KEY_MAP[b.era].name),
-            render: (era: EraKey) => ERA_KEY_MAP[era].name,
+            render: (eraKey: number) => {
+              const era: EraType = ERA_KEY_MAP[eraKey];
+              return <div className='circle-wrapper'>
+                <div className='circle' style={{
+                  backgroundColor: `${era.background}`,
+                  borderColor: `${era.borderColor}`,
+                  color: `${era.color}`
+                }}>{era.short}</div>
+                {era.name}</div>
+            },
+          }, {
+            title: 'Размер',
+            dataIndex: 'place',
+            width: '80px',
+            render: (place?: PlaceType) => place ? `${place.x}x${place.y}` : '',
+          }, {
+            title: 'Умения',
+            dataIndex: 'skillTypes',
+            width: '300px',
+            render: (skillTypes?: SkillType[]) => skillList.filter(skill => skillTypes?.includes(skill.id)).map((skill, index) =>
+              <div key={index}>
+                <img key={skill.id} src={skill.image} width='25px' alt={skill.image} className="skill-image"/>{skill.name}
+              </div>
+            ),
+          }, {
+            title: 'Описание',
+            dataIndex: 'definition',
+            sorter: (a: GreatBuildingType, b: GreatBuildingType) => compareAlphabetically(a.definition, b.definition),
           } ]}
           bordered
           rowKey={(gb: GreatBuildingType) => gb.id}
-/*
-          onRow={(gb: GreatBuildingType) => {
-            const era: EraType = ERA_KEY_MAP[gb.era];
-            return ({
-              style: {
-                background: era.background,
-                borderColor: era.borderColor,
-                color: era.color
-              }
-            });
-          }}
-*/
           pagination={false}
           size='small'
         />
-        // editGreatBuilding, isEditGreatBuildingShow, isNewGreatBuilding
         <Modal
-          title={`Детали Host ${editGreatBuilding?.name}`}
+          title={`Здание "${editGreatBuilding?.name}"`}
           visible={isEditGreatBuildingShow}
           onCancel={this.detailClose}
           footer={false}

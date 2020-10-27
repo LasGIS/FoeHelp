@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Modal, Row, Table, Tooltip } from "antd";
 import { DownloadOutlined, PlusOutlined } from "@ant-design/icons/lib/icons";
-import { SkillKind, SkillType } from "../../dictionary/dic-type";
+import { SkillType, Skill } from "../../dictionary/dic-type";
 import { compareAlphabetically, downloadToFile } from "../../utils";
 import { RootStoreData } from "../../common/types/redux-types";
 import { connect, ConnectedProps } from "react-redux";
@@ -20,12 +20,12 @@ import SearchInputWithDelay from "../../components/SearchInputWithDelay";
 
 class SkillsPage extends React.Component<PropsFromRedux> {
 
-  editRecord = (id: SkillKind) => {
+  editRecord = (id: SkillType) => {
     const { editSkillById } = this.props;
     editSkillById(id)
   };
 
-  saveDetail = (skill: SkillType) => {
+  saveDetail = (skill: Skill) => {
     const { isNewSkill, updateSkill, insertSkill } = this.props;
     isNewSkill ? insertSkill(skill) : updateSkill(skill);
   };
@@ -87,14 +87,14 @@ class SkillsPage extends React.Component<PropsFromRedux> {
             dataIndex: 'id',
             ellipsis: true,
             width: '200px',
-            sorter: (a: SkillType, b: SkillType) => compareAlphabetically(a.id, b.id),
+            sorter: (a: Skill, b: Skill) => compareAlphabetically(a.id, b.id),
           }, {
             title: 'Название',
             dataIndex: 'name',
             ellipsis: true,
             width: '300px',
-            sorter: (a: SkillType, b: SkillType) => compareAlphabetically(a.name, b.name),
-            render: (name: string, skill: SkillType) => (
+            sorter: (a: Skill, b: Skill) => compareAlphabetically(a.name, b.name),
+            render: (name: string, skill: Skill) => (
               <Tooltip placement="topLeft" title={`Редактировать умение "${skill.name}"`}>
                 <Button
                   type='link' className='gray_button_link'
@@ -109,7 +109,7 @@ class SkillsPage extends React.Component<PropsFromRedux> {
             ellipsis: true
           } ]}
           bordered
-          rowKey={(gb: SkillType) => gb.id}
+          rowKey={(gb: Skill) => gb.id}
           pagination={false}
           size='small'
         />

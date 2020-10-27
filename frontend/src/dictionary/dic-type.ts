@@ -55,13 +55,22 @@ export type EraType = {
   name: string;
 };
 
+export type RoadType = 0 | 1 | 2;
+
+/** дороги */
+export type Road = {
+  id: RoadType;
+  name: string;
+  image?: string;
+}
+
 export type PlaceType = {
   /** число клеток снизу вправо / */
   x: number;
   /** сверху вправо \ */
   y: number;
   /** число клеток дороги */
-  b: 0 | 1 | 2;
+  b: RoadType;
 }
 export type ImageType = string;
 
@@ -78,7 +87,7 @@ export type BuildingType = {
   place?: PlaceType;
 };
 
-export type SkillKind =
+export type SkillType =
   'guild_goods'
   | 'defence'
   | 'relic_hunt'
@@ -111,8 +120,8 @@ export type SkillKind =
   | 'special_goods'
   | 'diplomatic_gifts';
 
-export type SkillType = {
-  id: SkillKind;
+export type Skill = {
+  id: SkillType;
   name: string;
   definition?: string;
   image?: ImageType;
@@ -121,6 +130,5 @@ export type SkillType = {
 export type GreatBuildingType = BuildingType & {
   id: number;
   /** Умения */
-  skills?: SkillType[];
+  skillTypes?: SkillType[];
 }
-

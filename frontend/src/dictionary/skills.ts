@@ -1,6 +1,6 @@
-import { SkillType } from "./dic-type";
+import { Skill } from "./dic-type";
 
-export const SKILLS: SkillType[] = [ {
+export const SKILLS: Skill[] = [ {
   id: "population",
   name: "Население",
   definition: "Обеспечивает следующий ресурс: Население.",

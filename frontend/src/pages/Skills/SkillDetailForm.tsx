@@ -3,14 +3,14 @@
  */
 
 import React, { useEffect } from 'react';
-import { SkillType } from "../../dictionary/dic-type";
+import { Skill } from "../../dictionary/dic-type";
 import { Button, Form, Input, Row } from "antd";
 import TextArea from "antd/es/input/TextArea";
 
 type Props = {
   isExist: boolean,
-  editSkill?: SkillType;
-  onSave: (skill: SkillType) => any;
+  editSkill?: Skill;
+  onSave: (skill: Skill) => any;
   onClose: () => any;
 };
 
@@ -33,7 +33,7 @@ export const SkillDetailForm = ({ isExist, editSkill, onSave, onClose }: Props) 
   const handleSubmit = () => {
     form.validateFields()
       .then(values => {
-        const skill: SkillType = {
+        const skill: Skill = {
           ...editSkill,
           id: values.id,
           name: values.name,

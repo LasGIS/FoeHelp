@@ -3,15 +3,16 @@
  */
 
 import React, { useEffect } from 'react';
-import { GreatBuildingType, PlaceType, SkillType } from "../../dictionary/dic-type";
-import { Button, Form, Input, Row, Select } from "antd";
+import { GreatBuildingType, Road, Skill } from "../../dictionary/dic-type";
+import { Button, Form, Input, InputNumber, Row, Select } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { ERAS } from "../../dictionary/eras";
+import { ROADS } from "../../dictionary/simple";
 
 const { Option } = Select;
 
 type Props = {
-  skills: SkillType[];
+  skills: Skill[];
   isExist: boolean;
   editGreatBuilding?: GreatBuildingType;
   onSave: (build: GreatBuildingType) => any;
@@ -30,10 +31,8 @@ export const GreatBuildingDetailForm = ({ skills, isExist, editGreatBuilding, on
         definition: editGreatBuilding.definition,
         image: editGreatBuilding.image,
         era: editGreatBuilding.era,
-        skills: editGreatBuilding.skills?.map(skill => skill.id),
-        place_x: editGreatBuilding.place?.x,
-        place_y: editGreatBuilding.place?.y,
-        place_b: editGreatBuilding.place?.b,
+        skillTypes: editGreatBuilding.skillTypes,
+        place: editGreatBuilding.place,
       };
       form.setFieldsValue(fieldsGreatBuilding);
     }
@@ -42,13 +41,6 @@ export const GreatBuildingDetailForm = ({ skills, isExist, editGreatBuilding, on
   const handleSubmit = () => {
     form.validateFields()
       .then(values => {
-        const place: PlaceType | undefined =
-          (values.place_x && values.place_y && values.place_b) ? {
-            x: values.place_x,
-            y: values.place_y,
-            b: values.place_b
-          } : undefined;
-
         const build: GreatBuildingType = {
           ...editGreatBuilding,
           id: values.id,
@@ -56,8 +48,8 @@ export const GreatBuildingDetailForm = ({ skills, isExist, editGreatBuilding, on
           definition: values.definition,
           image: values.image,
           era: values.era,
-          skills: skills.filter(skill => values.skills.includes(skill.id)),
-          place: place,
+          skillTypes: values.skillTypes,
+          place: values.place,
         };
         onSave(build);
       });
@@ -96,7 +88,7 @@ export const GreatBuildingDetailForm = ({ skills, isExist, editGreatBuilding, on
         <Select
           placeholder={"Выберите эпоху"} showSearch optionLabelProp='label'
           filterOption={(input, option) => {
-            const label: string = (option && option.label && typeof(option.label) === 'string') ? option.label : '';
+            const label: string = (option && option.label && typeof (option.label) === 'string') ? option.label : '';
             return Boolean(label.toLowerCase().indexOf(input.toLowerCase()) >= 0)
           }}
         >
@@ -113,7 +105,7 @@ export const GreatBuildingDetailForm = ({ skills, isExist, editGreatBuilding, on
         </Select>
       </Form.Item>
       <Form.Item
-        name="skills" label="Усиление ВC"
+        name="skillTypes" label="Усиление ВC"
         rules={[ { required: true } ]}>
         <Select mode='multiple' placeholder={"добавьте усиление"} showSearch filterOption={(input, option) => {
           return Boolean(option && option.children[1].toLowerCase().indexOf(input.toLowerCase()) >= 0)
@@ -124,6 +116,35 @@ export const GreatBuildingDetailForm = ({ skills, isExist, editGreatBuilding, on
             </Option>
           ))}
         </Select>
+      </Form.Item>
+      <Form.Item label="Размер" required={true}>
+        <Input.Group compact>
+          <Form.Item
+            name={[ 'place', 'x' ]}
+            noStyle
+            rules={[ { required: true } ]}
+          >
+            <InputNumber placeholder='X' min={1} max={10} step={1} style={{ width: '50px' }}/>
+          </Form.Item>
+          <Form.Item
+            name={[ 'place', 'y' ]}
+            noStyle
+            rules={[ { required: true } ]}
+          >
+            <InputNumber placeholder='Y' min={1} max={10} step={1} style={{ width: '50px' }}/>
+          </Form.Item>
+          <Form.Item
+            name={[ 'place', 'b' ]}
+            noStyle
+            rules={[ { required: true } ]}
+          >
+            <Select placeholder="дорога" style={{ width: '200px' }}>
+              {ROADS.map((road: Road, index: number) => <Option key={index} value={road.id}>
+                {road.image && <img src={road.image} width='25px' alt={road.name} className="skill-image"/>}{road.name}
+              </Option>)}
+            </Select>
+          </Form.Item>
+        </Input.Group>
       </Form.Item>
       <Form.Item name="definition" label="Описание">
         <TextArea/>

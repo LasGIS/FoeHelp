@@ -10,7 +10,7 @@ import {
 } from './action-constants';
 import { SkillsActions, SkillsStoreData } from './types';
 import { SKILLS } from "../../../dictionary/skills";
-import { SkillType } from "../../../dictionary/dic-type";
+import { Skill } from "../../../dictionary/dic-type";
 
 const initialState: SkillsStoreData = {
   searchValue: '',
@@ -37,7 +37,7 @@ export function skillsReducer(state: SkillsStoreData = initialState, action: Ski
         isNewSkill: true,
       };
     case SKILLS_EDIT_SKILL_BY_IP: {
-      const filtered: SkillType[] = state.skillList.filter(skill => skill.id === action.id);
+      const filtered: Skill[] = state.skillList.filter(skill => skill.id === action.id);
       if (filtered.length) {
         return {
           ...state,
