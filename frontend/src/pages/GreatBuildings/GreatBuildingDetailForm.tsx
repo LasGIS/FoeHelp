@@ -32,7 +32,7 @@ export const GreatBuildingDetailForm = ({ skills, isExist, editGreatBuilding, on
         image: editGreatBuilding.image,
         era: editGreatBuilding.era,
         skillTypes: editGreatBuilding.skillTypes,
-        place: editGreatBuilding.place,
+        place: editGreatBuilding.place ? editGreatBuilding.place : { b: 1 },
       };
       form.setFieldsValue(fieldsGreatBuilding);
     }

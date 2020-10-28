@@ -1,5 +1,5 @@
 import React from "react";
-import { DesktopOutlined, HomeOutlined, LaptopOutlined } from "@ant-design/icons/lib/icons";
+import { BankOutlined, BookOutlined, GlobalOutlined, HomeOutlined, ToolOutlined } from "@ant-design/icons/lib/icons";
 import Home from "../Home/Home";
 import ErasPage from "../Eras/ErasPage";
 import GreatBuildingsPage from "../GreatBuildings/GreatBuildingsPage";
@@ -32,19 +32,26 @@ export type SelectedMenuData = {
 
 export const MENU_DATA: MenuData[] = [
   {
-    type: 'option', key: "home", name: "Home", icon: <HomeOutlined/>,
-    pathname: "/home", component: <Home/>
-  }, {
-    type: 'submenu', key: "dic", name: "Словари", icon: <DesktopOutlined/>,
+    type: 'submenu', key: "help", name: "Помощь", icon: <ToolOutlined/>,
     subMenus: [ {
-      type: 'option', key: "eras", name: "Эпохи", icon: <LaptopOutlined/>,
+      type: 'option', key: 'home', name: 'Дома', icon: <HomeOutlined/>,
+      pathname: "/home", component: <Home/>
+    } ]
+
+  }, {
+    type: 'submenu', key: "dic", name: "Словари", icon: <BankOutlined/>,
+    subMenus: [ {
+      type: 'option', key: "eras", name: "Эпохи", icon: <BookOutlined/>,
       pathname: "/eras", component: <ErasPage/>
     }, {
-      type: 'option', key: "g-build", name: "Великие Строения", icon: <LaptopOutlined/>,
-      pathname: "/great-buildings", component: <GreatBuildingsPage/>
-    }, {
-      type: 'option', key: "gb-skills", name: "Усиления Великих Строений", icon: <LaptopOutlined/>,
+      type: 'option', key: "gb-skills", name: "Усиления Великих Строений", icon: <BookOutlined/>,
       pathname: "/great-building-skills", component: <SkillsPage/>
+    } ]
+  }, {
+    type: 'submenu', key: "builds", name: "Строения", icon: <HomeOutlined/>,
+    subMenus: [ {
+      type: 'option', key: "g-build", name: "Великие Строения", icon: <GlobalOutlined/>,
+      pathname: "/great-buildings", component: <GreatBuildingsPage/>
     } ]
   }
 ];

@@ -93,7 +93,7 @@ class GreatBuildingsPage extends React.Component<PropsFromRedux> {
                 <Button
                   type='link'
                   className='era-button'
-                  icon={<img src={build.image} width='25px' alt={build.image} className="skill-image"/>}
+                  icon={<img src={build.image} height='46px' alt={build.image} className="skill-image"/>}
                   onClick={() => this.editRecord(build.id)}
                 >{name}</Button>
               </Tooltip>
@@ -130,6 +130,7 @@ class GreatBuildingsPage extends React.Component<PropsFromRedux> {
           }, {
             title: 'Описание',
             dataIndex: 'definition',
+            ellipsis: true,
             sorter: (a: GreatBuildingType, b: GreatBuildingType) => compareAlphabetically(a.definition, b.definition),
           } ]}
           bordered
