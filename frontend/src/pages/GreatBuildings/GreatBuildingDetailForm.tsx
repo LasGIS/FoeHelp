@@ -77,6 +77,9 @@ export const GreatBuildingDetailForm = ({ skills, isExist, editGreatBuilding, on
         } ]}>
         <Input disabled={isExist}/>
       </Form.Item>
+      <Form.Item name="image" label="Картинка (URL)">
+        <Input/>
+      </Form.Item>
       <Form.Item
         name="name" label="Название"
         rules={[ { required: true } ]}>
@@ -100,19 +103,6 @@ export const GreatBuildingDetailForm = ({ skills, isExist, editGreatBuilding, on
                 borderColor: era.borderColor,
                 color: era.color
               }}>{era.name}</div>
-            </Option>
-          ))}
-        </Select>
-      </Form.Item>
-      <Form.Item
-        name="skillTypes" label="Усиление ВC"
-        rules={[ { required: true } ]}>
-        <Select mode='multiple' placeholder={"добавьте усиление"} showSearch filterOption={(input, option) => {
-          return Boolean(option && option.children[1].toLowerCase().indexOf(input.toLowerCase()) >= 0)
-        }}>
-          {skills?.map((skill, index) => (
-            <Option key={`skill_id_option_${index}`} value={skill.id}>
-              <img src={skill.image} width='25px' alt={skill.image} className="skill-image"/>{skill.name}
             </Option>
           ))}
         </Select>
@@ -146,11 +136,21 @@ export const GreatBuildingDetailForm = ({ skills, isExist, editGreatBuilding, on
           </Form.Item>
         </Input.Group>
       </Form.Item>
-      <Form.Item name="definition" label="Описание">
-        <TextArea/>
+      <Form.Item
+        name="skillTypes" label="Усиление ВC"
+        rules={[ { required: true } ]}>
+        <Select mode='multiple' placeholder={"добавьте усиление"} showSearch filterOption={(input, option) => {
+          return Boolean(option && option.children[1].toLowerCase().indexOf(input.toLowerCase()) >= 0)
+        }}>
+          {skills?.map((skill, index) => (
+            <Option key={`skill_id_option_${index}`} value={skill.id}>
+              <img src={skill.image} width='25px' alt={skill.image} className="skill-image"/>{skill.name}
+            </Option>
+          ))}
+        </Select>
       </Form.Item>
-      <Form.Item name="image" label="Картинка (URL)">
-        <Input/>
+      <Form.Item name="definition" label="Описание">
+        <TextArea rows={4} autoSize={true} />
       </Form.Item>
       <Row justify="center">
         <Form.Item noStyle>
