@@ -1,3 +1,7 @@
+/*
+ * Copyright 2020 LasGIS FOE Helper
+ */
+
 import {
   SKILLS_DELETE_SKILL,
   SKILLS_EDIT_NEW_SKILL,

@@ -1,3 +1,7 @@
+/*
+ * Copyright 2020 LasGIS FOE Helper
+ */
+
 import {
   GREAT_BUILDING_DELETE,
   GREAT_BUILDING_EDIT_NEW,

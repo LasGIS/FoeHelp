@@ -1,3 +1,7 @@
+/*
+ * Copyright 2020 LasGIS FOE Helper
+ */
+
 import { Space } from "antd";
 import React from "react";
 

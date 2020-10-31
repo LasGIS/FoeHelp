@@ -1,3 +1,7 @@
+/*
+ * Copyright 2020 LasGIS FOE Helper
+ */
+
 import React from "react";
 import { Table } from "antd";
 import { ERAS } from "../../dictionary/eras";

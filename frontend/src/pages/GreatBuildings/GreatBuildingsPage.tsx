@@ -1,3 +1,7 @@
+/*
+ * Copyright 2020 LasGIS FOE Helper
+ */
+
 import React from "react";
 import { Button, Modal, Row, Table, Tooltip } from "antd";
 import { compareAlphabetically, compareNumber, downloadToFile } from "../../utils";

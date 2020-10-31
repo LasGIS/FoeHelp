@@ -1,3 +1,7 @@
+/*
+ * Copyright 2020 LasGIS FOE Helper
+ */
+
 import { Button, Space } from "antd";
 import React from "react";
 import { connect, ConnectedProps } from "react-redux";

@@ -1,9 +1,14 @@
+/*
+ * Copyright 2020 LasGIS FOE Helper
+ */
+
 import React from "react";
 import { BankOutlined, BookOutlined, GlobalOutlined, HomeOutlined, ToolOutlined } from "@ant-design/icons/lib/icons";
 import Home from "../Home/Home";
 import ErasPage from "../Eras/ErasPage";
 import GreatBuildingsPage from "../GreatBuildings/GreatBuildingsPage";
 import SkillsPage from "../Skills/SkillsPage";
+import Calculation from "../Calculation/Calculation";
 
 export type SubmenuData = {
   type: 'submenu';
@@ -34,6 +39,9 @@ export const MENU_DATA: MenuData[] = [
   {
     type: 'submenu', key: "help", name: "Помощь", icon: <ToolOutlined/>,
     subMenus: [ {
+      type: 'option', key: 'calculation', name: 'Расчёт вложения', icon: <HomeOutlined/>,
+      pathname: "/calculation", component: <Calculation/>
+    }, {
       type: 'option', key: 'home', name: 'Дома', icon: <HomeOutlined/>,
       pathname: "/home", component: <Home/>
     } ]

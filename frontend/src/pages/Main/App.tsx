@@ -12,12 +12,13 @@ import { findSelectedMenuByPathname, MENU_DATA, MenuData } from "./MenuHelper";
 import { RootStoreData } from "../../common/types/redux-types";
 import { commonHideLoader, commonShowLoader } from "../../common/services/action-creators";
 import { connect, ConnectedProps } from "react-redux";
+import Calculation from "../Calculation/Calculation";
 
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
 
 /** Здесь указывается версия билда */
-const version = '1.0.0.4';
+const version = '1.0.0.5';
 
 const resolveSubmenu = (subMenus: MenuData[]) => {
   return subMenus.map((menu: MenuData) => {
@@ -69,7 +70,7 @@ const RESOLVED_ROUTES = resolveRoutes(MENU_DATA);
 
 const App: React.FC<PropsFromRedux> = (props) => {
 
-  const [ menuCollapsed, setMenuCollapsed ] = useState<boolean>(false);
+  const [ menuCollapsed, setMenuCollapsed ] = useState<boolean>(true);
   const [ selectedKeys, setSelectedKeys ] = useState<string[]>([ '' ]);
   const [ breadcrumbs, setBreadcrumbs ] = useState<string[]>([ '...' ]);
 
@@ -111,7 +112,7 @@ const App: React.FC<PropsFromRedux> = (props) => {
           </Breadcrumb>
           <Content className="app__content">
             <Switch>
-              <Route key='zero' exact path="/" component={Home}/>
+              <Route key='zero' exact path="/" component={Calculation}/>
               <Route key='home' path="/home" component={Home}/>
               {RESOLVED_ROUTES}
             </Switch>

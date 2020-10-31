@@ -1,3 +1,7 @@
+/*
+ * Copyright 2020 LasGIS FOE Helper
+ */
+
 import { GetAllActionTypes } from '../../../common/types/redux-types';
 import * as CommonActionMaps from '../../../common/services/action-creators';
 import * as SkillsActionMaps from './action-creators';
