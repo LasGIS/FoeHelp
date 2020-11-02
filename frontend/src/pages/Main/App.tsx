@@ -18,7 +18,7 @@ const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
 
 /** Здесь указывается версия билда */
-const version = '1.0.0.6';
+const version = '1.0.0.7';
 
 const resolveSubmenu = (subMenus: MenuData[]) => {
   return subMenus.map((menu: MenuData) => {
@@ -112,8 +112,9 @@ const App: React.FC<PropsFromRedux> = (props) => {
           </Breadcrumb>
           <Content className="app__content">
             <Switch>
-              <Route key='zero' exact path="/" component={Calculation}/>
-              <Route key='home' path="/home" component={Home}/>
+              <Route key='_home' path="/_home" component={Home}/>
+              <Route key='_calculation' path="/_calculation" component={Calculation}/>
+              <Route key='zero' exact path="/"  component={Calculation}/>
               {RESOLVED_ROUTES}
             </Switch>
           </Content>
