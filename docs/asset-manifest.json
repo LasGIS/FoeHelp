@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/FoeHelp/static/css/main.1582a29e.chunk.css",
-    "main.js": "/FoeHelp/static/js/main.555df7b9.chunk.js",
-    "main.js.map": "/FoeHelp/static/js/main.555df7b9.chunk.js.map",
+    "main.js": "/FoeHelp/static/js/main.d562ee8a.chunk.js",
+    "main.js.map": "/FoeHelp/static/js/main.d562ee8a.chunk.js.map",
     "runtime-main.js": "/FoeHelp/static/js/runtime-main.76d65873.js",
     "runtime-main.js.map": "/FoeHelp/static/js/runtime-main.76d65873.js.map",
     "static/css/2.a640ff02.chunk.css": "/FoeHelp/static/css/2.a640ff02.chunk.css",
     "static/js/2.6a539956.chunk.js": "/FoeHelp/static/js/2.6a539956.chunk.js",
     "static/js/2.6a539956.chunk.js.map": "/FoeHelp/static/js/2.6a539956.chunk.js.map",
     "index.html": "/FoeHelp/index.html",
-    "precache-manifest.78cab9896de66f5e739d9badd6d0862a.js": "/FoeHelp/precache-manifest.78cab9896de66f5e739d9badd6d0862a.js",
+    "precache-manifest.880b17a234f7a31a6f1249901b6c65a3.js": "/FoeHelp/precache-manifest.880b17a234f7a31a6f1249901b6c65a3.js",
     "service-worker.js": "/FoeHelp/service-worker.js",
     "static/css/2.a640ff02.chunk.css.map": "/FoeHelp/static/css/2.a640ff02.chunk.css.map",
     "static/css/main.1582a29e.chunk.css.map": "/FoeHelp/static/css/main.1582a29e.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.a640ff02.chunk.css",
     "static/js/2.6a539956.chunk.js",
     "static/css/main.1582a29e.chunk.css",
-    "static/js/main.555df7b9.chunk.js"
+    "static/js/main.d562ee8a.chunk.js"
   ]
 }
