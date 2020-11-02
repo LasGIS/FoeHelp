@@ -112,9 +112,8 @@ const App: React.FC<PropsFromRedux> = (props) => {
           </Breadcrumb>
           <Content className="app__content">
             <Switch>
-              <Route key='_home' path="/_home" component={Home}/>
-              <Route key='_calculation' path="/_calculation" component={Calculation}/>
-              <Route key='zero' exact path="/"  component={Calculation}/>
+              <Route key='zero' exact path="/" component={Calculation}/>
+              <Route key='_home' path="/home" component={Home}/>
               {RESOLVED_ROUTES}
             </Switch>
           </Content>

@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0ac641bad95c48a87416a45c6a650176",
+    "revision": "0dadc5487db2b050e63736cc157236c1",
     "url": "/FoeHelp/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/FoeHelp/static/css/2.a640ff02.chunk.css"
   },
   {
-    "revision": "5d1ef4be8e5b313e0b88",
+    "revision": "220c41a85bd3be900d8b",
     "url": "/FoeHelp/static/css/main.1582a29e.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/FoeHelp/static/js/2.6a539956.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5d1ef4be8e5b313e0b88",
-    "url": "/FoeHelp/static/js/main.d562ee8a.chunk.js"
+    "revision": "220c41a85bd3be900d8b",
+    "url": "/FoeHelp/static/js/main.cfe9c24f.chunk.js"
   },
   {
     "revision": "efd3a3a8994eacf8fa81",

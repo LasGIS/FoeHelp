@@ -15,12 +15,15 @@ const Calculation: React.FC = () => {
   const [ form ] = Form.useForm();
 
   useEffect(() => {
-    const repayment: string | null = localStorage.getItem('repayment');
-    const factor: string | null = localStorage.getItem('factor');
+    const factorStr: string | null = localStorage.getItem('factor');
+    const repaymentStr: string | null = localStorage.getItem('repayment');
+    const factor: number = factorStr ? parseFloat(factorStr) : 1.9;
+    const repayment: number = repaymentStr ? parseInt(repaymentStr) : 0;
     form.setFieldsValue({
-      repayment: repayment ? parseInt(repayment) : null,
-      factor: factor ? parseFloat(factor) : 1.9
+      factor: factor,
+      repayment: repayment,
     });
+    calcEnclosure(factor, repayment);
   }, [ form ]);
 
 
@@ -54,7 +57,7 @@ const Calculation: React.FC = () => {
       <Form.Item label="Расчет вложения">
         <Input.Group compact>
           <Form.Item name="factor" noStyle>
-            <Select style={{ width: 70 }} onChange={onChangeFactor}>
+            <Select style={{ width: 80 }} onChange={onChangeFactor}>
               <Option value={1.85}>1.85</Option>
               <Option value={1.9}>1.9</Option>
               <Option value={2.0}>2.0</Option>
