@@ -2,84 +2,39 @@
  * Copyright 2020 LasGIS FOE Helper
  */
 
-import React, { useEffect, useState } from "react";
-import { Button, Form, Input, InputNumber, Select, Tooltip } from "antd";
-import { ToTopOutlined } from "@ant-design/icons/lib/icons";
-
-const { Option } = Select;
+import React from "react";
+import { Form } from "antd";
+import CalcForm from "./CalcForm";
+import { Calc } from "./calc-type";
 
 const Calculation: React.FC = () => {
 
-  const [ enclosure, setEnclosure ] = useState<number>(0);
-
-  const [ form ] = Form.useForm();
-
-  useEffect(() => {
-    const factorStr: string | null = localStorage.getItem('factor');
-    const repaymentStr: string | null = localStorage.getItem('repayment');
-    const factor: number = factorStr ? parseFloat(factorStr) : 1.9;
-    const repayment: number = repaymentStr ? parseInt(repaymentStr) : 0;
-    form.setFieldsValue({
-      factor: factor,
-      repayment: repayment,
-    });
-    calcEnclosure(factor, repayment);
-  }, [ form ]);
-
-
-  const calcEnclosure = (factor: number, repayment: number) => {
-    const enclosure: number = Math.round(factor * repayment);
-    setEnclosure(enclosure);
+  const storageLoadCalc = (storageName: string): Calc => {
+    const calcJson: string | null = localStorage.getItem(storageName);
+    if (typeof (calcJson) === 'string') {
+      return JSON.parse(calcJson);
+    } else {
+      return {
+        fac: 1.9,
+        fee: 0
+      }
+    }
   };
 
-  const onChangeRepayment = (rep?: string | number) => {
-    const factor: number = form.getFieldValue('factor');
-    const repayment: number = (rep && typeof (rep) === 'number') ? rep : 0;
-    localStorage.setItem("repayment", repayment.toString());
-    calcEnclosure(factor, repayment);
-  };
-
-  const onChangeFactor = (value: number) => {
-    const factor: number = value;
-    const repayment: number = form.getFieldValue('repayment')
-    localStorage.setItem("factor", factor.toString());
-    calcEnclosure(factor, repayment);
-  };
-
-  const clipboardWriteText = (text: string) => {
-    navigator.clipboard.writeText(text)
-      .then(r => console.log('clipboard.writeText успешно', r))
-      .catch(err => console.log('clipboard.writeText провал', err));
+  const storageSaveCalc = (storageName: string, calc: Calc) => {
+    localStorage.setItem(storageName, JSON.stringify(calc));
   };
 
   return (
-    <Form layout='vertical' form={form}>
+    <div className='ant-form-vertical'>
       <Form.Item label="Расчет вложения">
-        <Input.Group compact>
-          <Form.Item name="factor" noStyle>
-            <Select style={{ width: 80 }} onChange={onChangeFactor}>
-              <Option value={1.85}>1.85</Option>
-              <Option value={1.9}>1.9</Option>
-              <Option value={2.0}>2.0</Option>
-            </Select>
-          </Form.Item>
-          <Form.Item
-            name="repayment"
-            rules={[ { required: true, message: 'Размер возврата?' } ]}
-          >
-            <InputNumber placeholder='возврат' onChange={onChangeRepayment}/>
-          </Form.Item>
-          <Form.Item>
-            <Tooltip title='Сохранить в Буфер обмена'>
-              <Button type='primary' icon={<ToTopOutlined/>} onClick={() => clipboardWriteText(enclosure.toString())}> {enclosure}</Button>
-            </Tooltip>
-          </Form.Item>
-
-        </Input.Group>
+        <CalcForm key='calc-form-0' calc={storageLoadCalc("calc")} onSaveCalc={(calc: Calc) => storageSaveCalc("calc", calc)}/>
+        <CalcForm key='calc-form-1' calc={storageLoadCalc("calc1")} onSaveCalc={(calc: Calc) => storageSaveCalc("calc1", calc)}/>
+        <CalcForm key='calc-form-2' calc={storageLoadCalc("calc2")} onSaveCalc={(calc: Calc) => storageSaveCalc("calc2", calc)}/>
+        <CalcForm key='calc-form-3' calc={storageLoadCalc("calc3")} onSaveCalc={(calc: Calc) => storageSaveCalc("calc3", calc)}/>
       </Form.Item>
-    </Form>
+    </div>
   );
-
 };
 
 export default Calculation;
