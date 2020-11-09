@@ -2,6 +2,7 @@
  * Copyright 2020 LasGIS FOE Helper
  */
 
+import "./styles.scss";
 import React, { useEffect, useState } from "react";
 import { Button, Form, Input, InputNumber, Select, Tooltip } from "antd";
 import { SnippetsOutlined } from "@ant-design/icons/lib/icons";
@@ -11,6 +12,11 @@ const { Option } = Select;
 
 const FACTOR_OPTION: number[] = [ 1.85, 1.9, 2.0 ];
 
+type Error = {
+  message: string;
+  type: 'info' | 'warn' | 'error'
+}
+
 type Props = {
   calc: Calc;
   onSaveCalc: (calc: Calc) => void;
@@ -18,8 +24,11 @@ type Props = {
 
 const CalcForm: React.FC<Props> = ({ calc, onSaveCalc }) => {
 
-  const [ enclosure, setEnclosure ] = useState<number>(0);
+  const [ minEncl, setMinEncl ] = useState<number | undefined>(undefined);
+  const [ justEncl, setJustEncl ] = useState<number | undefined>(undefined);
+  const [ maxEncl, setMaxEncl ] = useState<number | undefined>(undefined);
 
+  const [ errors, setErrors ] = useState<Error[]>([]);
   const [ form ] = Form.useForm();
 
   useEffect(() => {
@@ -34,8 +43,87 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc }) => {
   }, [ form, calc ]);
 
   const calcEnclosure = (calc: Calc) => {
-    const enclosure: number = Math.round(calc.fac * calc.fee);
-    setEnclosure(enclosure);
+    const errorList: Error[] = [];
+    let minEnclosure: number | undefined = undefined;
+    let enclosure: number | undefined = undefined;
+    let maxEnclosure: number | undefined = undefined;
+
+    if (calc.fee) {
+
+      enclosure = Math.round(calc.fac * calc.fee);
+      if (calc.ned) {
+        const calcNow: number = calc.now || 0;
+        if (calc.rvl) {
+
+          minEnclosure = Math.round((calc.ned - calcNow + calc.rvl) / 2);
+          if (calc.rvl >= Math.round((calc.ned - calcNow) / 2)) {
+            errorList.push({
+              type: 'error',
+              message: `конкурент уже занял это место:   ${calc.rvl} > (${calc.ned} - ${calcNow}) / 2`
+            });
+            enclosure = undefined;
+            minEnclosure = undefined;
+          } else if (calc.fee > calc.ned - calcNow) {
+            errorList.push({
+              type: 'error',
+              message: `вложение превышает остаток:   ${calc.fee} > ${calc.ned} - ${calcNow}`
+            });
+            enclosure = undefined;
+          } else if (enclosure > calc.ned - calcNow) {
+            errorList.push({
+              type: 'warn',
+              message: `вложение превышает остаток:   ${calc.fac} * ${calc.fee} > ${calc.ned} - ${calcNow}`
+            });
+            enclosure = undefined;
+            maxEnclosure = calc.ned - calcNow;
+          } else if (enclosure === minEnclosure) {
+            minEnclosure = undefined;
+          } else if (enclosure < (calc.ned - calcNow + calc.rvl) / 2) {
+            errorList.push({
+              type: 'warn',
+              message: `Нет ГАРАНТА для занятия места:  ${calc.fac} * ${calc.fee} < (${calc.ned} - ${calcNow} + ${calc.rvl}) / 2`
+            });
+            maxEnclosure = minEnclosure;
+            minEnclosure = undefined;
+          }
+
+        } else {
+
+          minEnclosure = Math.round((calc.ned - calcNow) / 2);
+          if (calc.fee > calc.ned - calcNow) {
+            errorList.push({
+              type: 'error',
+              message: `вложение превышает остаток:   ${calc.fee} > ${calc.ned} - ${calcNow}`
+            });
+            enclosure = undefined;
+          } else if (enclosure > calc.ned - calcNow) {
+            errorList.push({
+              type: 'warn',
+              message: `вложение превышает остаток:   ${calc.fac} * ${calc.fee} > ${calc.ned} - ${calcNow}`
+            });
+            enclosure = undefined;
+            maxEnclosure = calc.ned - calcNow;
+          } else if (enclosure === minEnclosure) {
+            minEnclosure = undefined;
+          } else if (enclosure < (calc.ned - calcNow) / 2) {
+            errorList.push({
+              type: 'warn',
+              message: `Нет ГАРАНТА для занятия места:  ${calc.fac} * ${calc.fee} < (${calc.ned} - ${calcNow}) / 2`
+            });
+            maxEnclosure = minEnclosure;
+            minEnclosure = undefined;
+          }
+
+        }
+      }
+    } else {
+      errorList.push({ type: 'error', message: "Введи Откат" });
+    }
+
+    setMinEncl(minEnclosure);
+    setJustEncl(enclosure);
+    setMaxEncl(maxEnclosure);
+    setErrors(errorList);
   };
 
   const onChangeRepayment = () => {
@@ -58,7 +146,7 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc }) => {
   };
 
   return (
-    <Form layout='vertical' form={form}>
+    <Form className='calc-form' layout='vertical' form={form}>
       <Input.Group compact>
         <Form.Item name="fac" noStyle>
           <Select style={{ width: 80 }} onChange={onChangeFactor}>
@@ -71,22 +159,49 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc }) => {
         <Form.Item name="ned">
           <InputNumber placeholder='нужно' min={0} onChange={onChangeRepayment}/>
         </Form.Item>
-        <Form.Item name="fee" rules={[{ required: true, message: 'Откат ?' } ]}>
+        <Form.Item name="fee">
           <InputNumber placeholder='откат' min={0} onChange={onChangeRepayment}/>
         </Form.Item>
         <Form.Item name="rvl">
           <InputNumber placeholder='конкур.' min={0} onChange={onChangeRepayment}/>
         </Form.Item>
+        {minEncl &&
         <Form.Item>
-          <Tooltip title='Сохранить в Буфер обмена'>
-            <Button type='primary' icon={<SnippetsOutlined/>} onClick={() => clipboardWriteText(enclosure.toString())}> {enclosure}</Button>
+          <Tooltip title={<>
+            <h3>для гарантированного занятия места</h3>
+            <p>сохранить в буфер обмена</p>
+          </>}>
+            <Button className='button-min' type='primary' icon={<SnippetsOutlined/>}
+                    onClick={() => clipboardWriteText(minEncl.toString())}> {minEncl}</Button>
           </Tooltip>
         </Form.Item>
-
+        }
+        {justEncl &&
+        <Form.Item>
+          <Tooltip title={<>
+            <h3>Вложение по откату</h3>
+            <p>сохранить в буфер обмена</p>
+          </>}>
+            <Button className='button-just' type='primary' icon={<SnippetsOutlined/>}
+                    onClick={() => clipboardWriteText(justEncl.toString())}> {justEncl}</Button>
+          </Tooltip>
+        </Form.Item>
+        }
+        {maxEncl &&
+        <Form.Item>
+          <Tooltip title={<>
+            <h3>для гарантированного занятия места</h3>
+            <p>сохранить в буфер обмена</p>
+          </>}>
+            <Button className='button-max' type='primary' icon={<SnippetsOutlined/>}
+                    onClick={() => clipboardWriteText(maxEncl.toString())}> {maxEncl}</Button>
+          </Tooltip>
+        </Form.Item>
+        }
       </Input.Group>
+      <div className='errors'>{errors.map((err: Error, index) => <div key={index} className={`${err.type}`}>{err.message}</div>)}</div>
     </Form>
   );
-
 };
 
 export default CalcForm;
