@@ -3,12 +3,21 @@
  */
 
 import React from "react";
-import { BankOutlined, BookOutlined, GlobalOutlined, HomeOutlined, ToolOutlined } from "@ant-design/icons/lib/icons";
+import {
+  BankOutlined,
+  BookOutlined,
+  CalculatorOutlined,
+  GlobalOutlined,
+  HomeOutlined,
+  ReadOutlined,
+  ToolOutlined
+} from "@ant-design/icons/lib/icons";
 import Home from "../Home/Home";
 import ErasPage from "../Eras/ErasPage";
 import GreatBuildingsPage from "../GreatBuildings/GreatBuildingsPage";
 import SkillsPage from "../Skills/SkillsPage";
 import Calculation from "../Calculation/Calculation";
+import ResidentialBuildingsPage from "../ResidentialBuildings/ResidentialBuildingsPage";
 
 export type SubmenuData = {
   type: 'submenu';
@@ -39,7 +48,7 @@ export const MENU_DATA: MenuData[] = [
   {
     type: 'submenu', key: "help", name: "Помощь", icon: <ToolOutlined/>,
     subMenus: [ {
-      type: 'option', key: 'calculation', name: 'Расчёт вложения', icon: <HomeOutlined/>,
+      type: 'option', key: 'calculation', name: 'Расчёт вложения', icon: <CalculatorOutlined/>,
       pathname: "/calculation", component: <Calculation/>
     }, {
       type: 'option', key: 'home', name: 'Дома', icon: <HomeOutlined/>,
@@ -47,7 +56,7 @@ export const MENU_DATA: MenuData[] = [
     } ]
 
   }, {
-    type: 'submenu', key: "dic", name: "Словари", icon: <BankOutlined/>,
+    type: 'submenu', key: "dic", name: "Словари", icon: <ReadOutlined/>,
     subMenus: [ {
       type: 'option', key: "eras", name: "Эпохи", icon: <BookOutlined/>,
       pathname: "/eras", component: <ErasPage/>
@@ -56,10 +65,13 @@ export const MENU_DATA: MenuData[] = [
       pathname: "/great-building-skills", component: <SkillsPage/>
     } ]
   }, {
-    type: 'submenu', key: "builds", name: "Строения", icon: <HomeOutlined/>,
+    type: 'submenu', key: "builds", name: "Строения", icon: <BankOutlined/>,
     subMenus: [ {
       type: 'option', key: "g-build", name: "Великие Строения", icon: <GlobalOutlined/>,
       pathname: "/great-buildings", component: <GreatBuildingsPage/>
+    }, {
+      type: 'option', key: "r-build", name: "Жилые постройки", icon: <HomeOutlined/>,
+      pathname: "/residential-buildings", component: <ResidentialBuildingsPage/>
     } ]
   }
 ];

@@ -13,7 +13,7 @@ import {
 } from './action-constants';
 import { GreatBuildingsActions, GreatBuildingsStoreData } from './types';
 import { GREAT_BUILDING } from "../../../dictionary/great-buildings";
-import { GreatBuildingType } from "../../../dictionary/dic-type";
+import { GreatBuilding } from "../../../dictionary/dic-type";
 
 const initialState: GreatBuildingsStoreData = {
   greatBuildingList: GREAT_BUILDING,
@@ -37,7 +37,7 @@ export function greatBuildingsReducer(state: GreatBuildingsStoreData = initialSt
         isNewGreatBuilding: true,
       };
     case GREAT_BUILDING_EDIT_BY_IP: {
-      const filtered: GreatBuildingType[] = state.greatBuildingList.filter(greatBuilding => greatBuilding.id === action.id);
+      const filtered: GreatBuilding[] = state.greatBuildingList.filter(greatBuilding => greatBuilding.id === action.id);
       if (filtered.length) {
         return {
           ...state,

@@ -5,54 +5,54 @@
 import React from "react";
 import { Button, Modal, Row, Table, Tooltip } from "antd";
 import { compareAlphabetically, compareNumber, downloadToFile } from "../../utils";
-import { EraType, GreatBuilding, Place, SkillType } from "../../dictionary/dic-type";
+import { EraType, ResidentialBuilding, Place, SkillType } from "../../dictionary/dic-type";
 import { RootStoreData } from "../../common/types/redux-types";
 import { connect, ConnectedProps } from "react-redux";
 import { ERA_KEY_MAP } from "../../dictionary/eras";
 import { DownloadOutlined, PlusOutlined } from "@ant-design/icons/lib/icons";
 import {
-  deleteGreatBuildingByIp,
-  editGreatBuildingById,
-  editGreatBuildingShow,
-  editNewGreatBuilding,
-  insertGreatBuilding,
-  setIsNewGreatBuilding,
-  updateGreatBuilding
+  deleteResidentialBuildingByIp,
+  editResidentialBuildingById,
+  editResidentialBuildingShow,
+  editNewResidentialBuilding,
+  insertResidentialBuilding,
+  setIsNewResidentialBuilding,
+  updateResidentialBuilding
 } from "./services/action-creators";
-import { GreatBuildingDetailForm } from "./GreatBuildingDetailForm";
+import { ResidentialBuildingDetailForm } from "./ResidentialBuildingDetailForm";
 
-class GreatBuildingsPage extends React.Component<PropsFromRedux> {
+class ResidentialBuildingsPage extends React.Component<PropsFromRedux> {
 
   createNewBuilding = () => {
-    const { editNewGreatBuilding } = this.props;
-    editNewGreatBuilding();
+    const { editNewResidentialBuilding } = this.props;
+    editNewResidentialBuilding();
   };
 
   editRecord = (id?: number) => {
-    const { editGreatBuildingById } = this.props;
-    id && editGreatBuildingById(id);
+    const { editResidentialBuildingById } = this.props;
+    id && editResidentialBuildingById(id);
   };
 
-  saveDetail = (greatBuilding: GreatBuilding) => {
-    const { isNewGreatBuilding, updateGreatBuilding, insertGreatBuilding } = this.props;
-    isNewGreatBuilding ? insertGreatBuilding(greatBuilding) : updateGreatBuilding(greatBuilding);
+  saveDetail = (residentialBuilding: ResidentialBuilding) => {
+    const { isNewResidentialBuilding, updateResidentialBuilding, insertResidentialBuilding } = this.props;
+    isNewResidentialBuilding ? insertResidentialBuilding(residentialBuilding) : updateResidentialBuilding(residentialBuilding);
   };
 
   detailClose = () => {
-    const { editGreatBuildingShow } = this.props;
-    editGreatBuildingShow(false);
+    const { editResidentialBuildingShow } = this.props;
+    editResidentialBuildingShow(false);
   };
 
   saveToFile = () => {
-    const { greatBuildingList } = this.props;
-    downloadToFile(greatBuildingList, 'great-buildings.ts', 'text/plain',
+    const { residentialBuildingList } = this.props;
+    downloadToFile(residentialBuildingList, 'residential-buildings.ts', 'text/plain',
       "/** Великие Строения */\n" +
-      "import { GreatBuilding } from \"./dic-type\";\n\n" +
-      "export const GREAT_BUILDING: GreatBuilding[] = ", ";\n");
+      "import { ResidentialBuilding } from \"./dic-type\";\n\n" +
+      "export const GREAT_BUILDING: ResidentialBuilding[] = ", ";\n");
   }
 
   render() {
-    const { greatBuildingList, editGreatBuilding, isEditGreatBuildingShow, isNewGreatBuilding, skillList } = this.props;
+    const { residentialBuildingList, editResidentialBuilding, isEditResidentialBuildingShow, isNewResidentialBuilding, skillList } = this.props;
     const iconsSize: string = 'https://foeru.innogamescdn.com/assets/shared/icons/size.png';
     return (
       <>
@@ -75,20 +75,20 @@ class GreatBuildingsPage extends React.Component<PropsFromRedux> {
           </Button>
         </Row>
         <Table
-          dataSource={greatBuildingList}
+          dataSource={residentialBuildingList}
           columns={[ {
             title: '№',
             dataIndex: 'id',
             ellipsis: true,
             width: '50px',
-            sorter: (a: GreatBuilding, b: GreatBuilding) => compareNumber(a.id, b.id),
+            sorter: (a: ResidentialBuilding, b: ResidentialBuilding) => compareNumber(a.id, b.id),
           }, {
             title: 'Здание',
             dataIndex: 'name',
             ellipsis: true,
             width: '300px',
-            sorter: (a: GreatBuilding, b: GreatBuilding) => compareAlphabetically(a.name, b.name),
-            render: (name: string, build: GreatBuilding) => (
+            sorter: (a: ResidentialBuilding, b: ResidentialBuilding) => compareAlphabetically(a.name, b.name),
+            render: (name: string, build: ResidentialBuilding) => (
               <Tooltip placement="topLeft" title={`Редактировать строение "${build.name}"`}>
                 <Button
                   type='link'
@@ -102,7 +102,7 @@ class GreatBuildingsPage extends React.Component<PropsFromRedux> {
             title: 'Эра',
             dataIndex: 'era',
             width: '250px',
-            sorter: (a: GreatBuilding, b: GreatBuilding) => compareAlphabetically(ERA_KEY_MAP[a.era].name, ERA_KEY_MAP[b.era].name),
+            sorter: (a: ResidentialBuilding, b: ResidentialBuilding) => compareAlphabetically(ERA_KEY_MAP[a.era].name, ERA_KEY_MAP[b.era].name),
             render: (eraKey: number) => {
               const era: EraType = ERA_KEY_MAP[eraKey];
               return <div className='circle-wrapper'>
@@ -133,25 +133,24 @@ class GreatBuildingsPage extends React.Component<PropsFromRedux> {
             title: 'Описание',
             dataIndex: 'definition',
             ellipsis: true,
-            sorter: (a: GreatBuilding, b: GreatBuilding) => compareAlphabetically(a.definition, b.definition),
+            sorter: (a: ResidentialBuilding, b: ResidentialBuilding) => compareAlphabetically(a.definition, b.definition),
           } ]}
           bordered
-          rowKey={(gb: GreatBuilding) => gb.id}
+          rowKey={(gb: ResidentialBuilding) => gb.id}
           pagination={false}
           size='small'
         />
         <Modal
-          title={`Здание "${editGreatBuilding?.name}"`}
-          visible={isEditGreatBuildingShow}
+          title={`Здание "${editResidentialBuilding?.name}"`}
+          visible={isEditResidentialBuildingShow}
           onCancel={this.detailClose}
           footer={false}
           maskClosable={false}
           width='1024px'
         >
-          <GreatBuildingDetailForm
-            isExist={!isNewGreatBuilding}
-            skills={skillList}
-            editGreatBuilding={editGreatBuilding}
+          <ResidentialBuildingDetailForm
+            isExist={!isNewResidentialBuilding}
+            editResidentialBuilding={editResidentialBuilding}
             onSave={this.saveDetail}
             onClose={this.detailClose}
           />
@@ -162,29 +161,29 @@ class GreatBuildingsPage extends React.Component<PropsFromRedux> {
 }
 
 const mapState = (state: RootStoreData) => {
-  const { greatBuildingList, editGreatBuilding, isEditGreatBuildingShow, isNewGreatBuilding } = state.greatBuilds;
+  const { residentialBuildingList, editResidentialBuilding, isEditResidentialBuildingShow, isNewResidentialBuilding } = state.residencies;
   const { skillList } = state.skills;
   return {
-    greatBuildingList,
-    editGreatBuilding,
-    isEditGreatBuildingShow,
-    isNewGreatBuilding,
+    residentialBuildingList,
+    editResidentialBuilding,
+    isEditResidentialBuildingShow,
+    isNewResidentialBuilding,
     skillList
   };
 };
 
 const mapDispatch = {
-  editGreatBuildingShow,
-  setIsNewGreatBuilding,
-  editNewGreatBuilding,
-  editGreatBuildingById,
-  insertGreatBuilding,
-  updateGreatBuilding,
-  deleteGreatBuildingByIp,
+  editResidentialBuildingShow,
+  setIsNewResidentialBuilding,
+  editNewResidentialBuilding,
+  editResidentialBuildingById,
+  insertResidentialBuilding,
+  updateResidentialBuilding,
+  deleteResidentialBuildingByIp,
 };
 
 const connector = connect(mapState, mapDispatch);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-export default connector(GreatBuildingsPage);
+export default connector(ResidentialBuildingsPage);

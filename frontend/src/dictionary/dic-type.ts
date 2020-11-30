@@ -55,26 +55,66 @@ export type EraType = {
   name: string;
 };
 
-export type RoadType = 0 | 1 | 2;
+/** единица времени */
+export type UnitTimeType = '5m' | '15m' | '1h' | '4h' | '8h' | '1d' | '2d';
 
-/** дороги */
-export type Road = {
-  id: RoadType;
+/** Ресурсы (население, монеты, молотки, бриллианты) */
+export type ResourceType = 'population' | 'money' | 'tools' | 'diamond';
+
+export type Resource = {
+  type: RoadType;
   name: string;
   image?: string;
-}
+};
 
-export type PlaceType = {
+/** число конкретного ресурса */
+export type ResourceCount = Resource & {
+  count: number;
+};
+
+/** проиводительность конкретного ресурса в единицу времени */
+export type ResourceProductivity = ResourceCount & {
+  time: number;
+  unitTime: UnitTimeType;
+};
+
+/** дороги */
+export type RoadType = 0 | 1 | 2;
+
+export type Road = {
+  type: RoadType;
+  name: string;
+  image?: string;
+};
+
+export type Place = {
   /** число клеток снизу вправо / */
   x: number;
   /** сверху вправо \ */
   y: number;
   /** число клеток дороги */
   b: RoadType;
-}
+};
+
 export type ImageType = string;
 
-export type BuildingType = {
+/**
+ * 'residential' - Жилые постройки
+ * 'production' - Производственные постройки (молотки)
+ * 'industrial' - Промышленные постройки
+ * 'social' - Общественные постройки
+ * 'decor' - Декоры
+ * 'military' - Военные постройки
+ * 'great' - Великие строения
+ * 'special' - Особые постройки
+ */
+export type BuildingType = 'residential' | 'production' | 'industrial' | 'social' | 'decor' | 'military' | 'great' | 'special';
+
+export type Building = {
+  /** тип строения */
+  type: BuildingType;
+  /** номер по списку (уникален для типа строения) */
+  id: number;
   /** url картинки */
   image?: ImageType;
   /** Название */
@@ -84,7 +124,7 @@ export type BuildingType = {
   /** Эпоха */
   era: EraKey;
   /** Место */
-  place?: PlaceType;
+  place?: Place;
 };
 
 export type SkillType =
@@ -127,8 +167,16 @@ export type Skill = {
   image?: ImageType;
 };
 
-export type GreatBuildingType = BuildingType & {
-  id: number;
+export type GreatBuilding = Building & {
   /** Умения */
   skillTypes?: SkillType[];
+}
+
+export type ResidentialBuilding = Building & {
+  /** Стоимость строительства (Монеты, Ресурсы, Бриллианты) */
+  expense?: ResourceCount[];
+  /** Приносит */
+  benefit?: ResourceCount[];
+  /** Производит */
+  produce?: ResourceProductivity[];
 }
