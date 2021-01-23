@@ -7,6 +7,8 @@ import React, { useEffect, useState } from "react";
 import { Button, Form, Input, InputNumber, Select, Tooltip } from "antd";
 import { SnippetsOutlined } from "@ant-design/icons/lib/icons";
 import { Calc } from "./calc-type";
+import classNames from "classnames";
+import { Primary } from "./Calculation";
 
 const { Option } = Select;
 
@@ -19,10 +21,12 @@ type Error = {
 
 type Props = {
   calc: Calc;
+  primary: Primary;
   onSaveCalc: (calc: Calc) => void;
+  onSetPrimary: (primary: Primary) => void;
 };
 
-const CalcForm: React.FC<Props> = ({ calc, onSaveCalc }) => {
+const CalcForm: React.FC<Props> = ({ calc, onSaveCalc, primary, onSetPrimary }) => {
 
   const [ minEncl, setMinEncl ] = useState<number | undefined>(undefined);
   const [ justEncl, setJustEncl ] = useState<number | undefined>(undefined);
@@ -130,6 +134,7 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc }) => {
     const calc: Calc = form.getFieldsValue();
     onSaveCalc(calc);
     calcEnclosure(calc);
+    onSetPrimary(undefined);
   };
 
   const onChangeFactor = (factor: number) => {
@@ -137,12 +142,13 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc }) => {
     calc.fac = factor;
     onSaveCalc(calc);
     calcEnclosure(calc);
+    onSetPrimary(undefined);
   };
 
-  const clipboardWriteText = (text: string) => {
+  const clipboardWriteText = (text: string, primary: Primary) => {
     navigator.clipboard.writeText(text)
-      .then(r => console.log('clipboard.writeText успешно', r))
-      .catch(err => console.log('clipboard.writeText провал', err));
+      .then(() => onSetPrimary(primary))
+      .catch(() => onSetPrimary(undefined))
   };
 
   return (
@@ -171,8 +177,8 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc }) => {
             <h3>для гарантированного занятия места</h3>
             <p>сохранить в буфер обмена</p>
           </>}>
-            <Button className='button-min' type='primary' icon={<SnippetsOutlined/>}
-                    onClick={() => clipboardWriteText(minEncl.toString())}> {minEncl}</Button>
+            <Button className={classNames('button-min', { 'selected': primary === 'min' })} type='primary' icon={<SnippetsOutlined/>}
+                    onClick={() => clipboardWriteText(minEncl.toString(), 'min')}> {minEncl}</Button>
           </Tooltip>
         </Form.Item>
         }
@@ -182,8 +188,8 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc }) => {
             <h3>Вложение по откату</h3>
             <p>сохранить в буфер обмена</p>
           </>}>
-            <Button className='button-just' type='primary' icon={<SnippetsOutlined/>}
-                    onClick={() => clipboardWriteText(justEncl.toString())}> {justEncl}</Button>
+            <Button className={classNames('button-just', { 'selected': primary === 'just' })} type='primary' icon={<SnippetsOutlined/>}
+                    onClick={() => clipboardWriteText(justEncl.toString(), 'just')}> {justEncl}</Button>
           </Tooltip>
         </Form.Item>
         }
@@ -193,8 +199,8 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc }) => {
             <h3>для гарантированного занятия места</h3>
             <p>сохранить в буфер обмена</p>
           </>}>
-            <Button className='button-max' type='primary' icon={<SnippetsOutlined/>}
-                    onClick={() => clipboardWriteText(maxEncl.toString())}> {maxEncl}</Button>
+            <Button className={classNames('button-max', { 'selected': primary === 'max' })} type='primary' icon={<SnippetsOutlined/>}
+                    onClick={() => clipboardWriteText(maxEncl.toString(), 'max')}> {maxEncl}</Button>
           </Tooltip>
         </Form.Item>
         }

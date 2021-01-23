@@ -1,8 +1,3 @@
-/*!
- / Copyright 2020 LasGIS FOE Helper
- /
- */
-
 .calc-form {
 
   & .ant-form-item {
@@ -32,20 +27,36 @@
   & .ant-btn {
     margin-left: 8px;
     width: 100px;
+    background: black;
 
     &.button-min {
       border-color: crimson;
-      background: #662211;
+      background: #200000;
+      color: crimson;
+      &.selected {
+        color: white;
+        background: #662211;
+      }
     }
 
     &.button-just {
       border-color: green;
-      background: darkgreen;
+      background: #001600;
+      color: green;
+      &.selected {
+        color: white;
+        background: darkgreen;
+      }
     }
 
     &.button-max {
       border-color: gold;
-      background: darkgoldenrod;
+      background: #202000;
+      color: gold;
+      &.selected {
+        color: white;
+        background: darkgoldenrod;
+      }
     }
   }
 }
