@@ -60,32 +60,33 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc, primary, onSetPrimary }) 
         if (calc.rvl) {
 
           minEnclosure = Math.round((calc.ned - calcNow + calc.rvl) / 2);
-          if (calc.rvl >= Math.round((calc.ned - calcNow) / 2)) {
+          if (calc.rvl >= Math.round(calc.ned - calcNow)) {
             errorList.push({
               type: 'error',
-              message: `конкурент уже занял это место:   ${calc.rvl} > (${calc.ned} - ${calcNow}) / 2`
+              message: `Конкурент уже занял это место:   ${calc.rvl} >= ${calc.ned} - ${calcNow} = ${Math.round(calc.ned - calcNow)}`
             });
             enclosure = undefined;
             minEnclosure = undefined;
           } else if (calc.fee > calc.ned - calcNow) {
             errorList.push({
               type: 'error',
-              message: `вложение превышает остаток:   ${calc.fee} > ${calc.ned} - ${calcNow}`
+              message: `Вложение превышает остаток:   ${calc.fee} > ${calc.ned} - ${calcNow} = ${Math.round(calc.ned - calcNow)}`
             });
             enclosure = undefined;
           } else if (enclosure > calc.ned - calcNow) {
             errorList.push({
               type: 'warn',
-              message: `вложение превышает остаток:   ${calc.fac} * ${calc.fee} > ${calc.ned} - ${calcNow}`
+              message: `Вложение превышает остаток:   ${calc.fac} * ${calc.fee} = ${Math.round(calc.fac * calc.fee)}`
+                + ` >= ${calc.ned} - ${calcNow} = ${Math.round(calc.ned - calcNow)}`
             });
             enclosure = undefined;
-            maxEnclosure = calc.ned - calcNow;
           } else if (enclosure === minEnclosure) {
             minEnclosure = undefined;
           } else if (enclosure < (calc.ned - calcNow + calc.rvl) / 2) {
             errorList.push({
               type: 'warn',
-              message: `Нет ГАРАНТА для занятия места:  ${calc.fac} * ${calc.fee} < (${calc.ned} - ${calcNow} + ${calc.rvl}) / 2`
+              message: `Нет ГАРАНТА для занятия места:  ${calc.fac} * ${calc.fee} = ${Math.round(calc.fac * calc.fee)}`
+                + ` <= (${calc.ned} - ${calcNow} + ${calc.rvl}) / 2 = ${Math.round((calc.ned - calcNow + calc.rvl) / 2)}`
             });
             maxEnclosure = minEnclosure;
             minEnclosure = undefined;
@@ -97,22 +98,23 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc, primary, onSetPrimary }) 
           if (calc.fee > calc.ned - calcNow) {
             errorList.push({
               type: 'error',
-              message: `вложение превышает остаток:   ${calc.fee} > ${calc.ned} - ${calcNow}`
+              message: `Вложение превышает остаток:   ${calc.fee} >= ${calc.ned} - ${calcNow} = ${Math.round(calc.ned - calcNow)}`
             });
             enclosure = undefined;
           } else if (enclosure > calc.ned - calcNow) {
             errorList.push({
               type: 'warn',
-              message: `вложение превышает остаток:   ${calc.fac} * ${calc.fee} > ${calc.ned} - ${calcNow}`
+              message: `Вложение превышает остаток:   ${calc.fac} * ${calc.fee} = ${Math.round(calc.fac * calc.fee)}`
+                +` >= ${calc.ned} - ${calcNow} = ${Math.round(calc.ned - calcNow)}`
             });
             enclosure = undefined;
-            maxEnclosure = calc.ned - calcNow;
           } else if (enclosure === minEnclosure) {
             minEnclosure = undefined;
           } else if (enclosure < (calc.ned - calcNow) / 2) {
             errorList.push({
               type: 'warn',
-              message: `Нет ГАРАНТА для занятия места:  ${calc.fac} * ${calc.fee} < (${calc.ned} - ${calcNow}) / 2`
+              message: `Нет ГАРАНТА для занятия места:  ${calc.fac} * ${calc.fee} = ${Math.round(calc.fac * calc.fee)}`
+                + ` <= (${calc.ned} - ${calcNow}) / 2 = ${Math.round((calc.ned - calcNow) / 2)}`
             });
             maxEnclosure = minEnclosure;
             minEnclosure = undefined;
@@ -173,10 +175,7 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc, primary, onSetPrimary }) 
         </Form.Item>
         {minEncl &&
         <Form.Item>
-          <Tooltip title={<>
-            <h3>для гарантированного занятия места</h3>
-            <p>сохранить в буфер обмена</p>
-          </>}>
+          <Tooltip title='Для занятия места с ГАРАНТОМ'>
             <Button className={classNames('button-min', { 'selected': primary === 'min' })} type='primary' icon={<SnippetsOutlined/>}
                     onClick={() => clipboardWriteText(minEncl.toString(), 'min')}> {minEncl}</Button>
           </Tooltip>
@@ -184,10 +183,7 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc, primary, onSetPrimary }) 
         }
         {justEncl &&
         <Form.Item>
-          <Tooltip title={<>
-            <h3>Вложение по откату</h3>
-            <p>сохранить в буфер обмена</p>
-          </>}>
+          <Tooltip title='Вложение по откату'>
             <Button className={classNames('button-just', { 'selected': primary === 'just' })} type='primary' icon={<SnippetsOutlined/>}
                     onClick={() => clipboardWriteText(justEncl.toString(), 'just')}> {justEncl}</Button>
           </Tooltip>
@@ -195,10 +191,7 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc, primary, onSetPrimary }) 
         }
         {maxEncl &&
         <Form.Item>
-          <Tooltip title={<>
-            <h3>для гарантированного занятия места</h3>
-            <p>сохранить в буфер обмена</p>
-          </>}>
+          <Tooltip title='Для занятия места с ГАРАНТОМ'>
             <Button className={classNames('button-max', { 'selected': primary === 'max' })} type='primary' icon={<SnippetsOutlined/>}
                     onClick={() => clipboardWriteText(maxEncl.toString(), 'max')}> {maxEncl}</Button>
           </Tooltip>

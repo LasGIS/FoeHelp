@@ -50,6 +50,9 @@ export const MENU_DATA: MenuData[] = [
     subMenus: [ {
       type: 'option', key: 'calculation', name: 'Расчёт вложения', icon: <CalculatorOutlined/>,
       pathname: "/calculation", component: <Calculation/>
+    },{
+      type: 'option', key: 'calculation', name: 'Рост Уровня', icon: <CalculatorOutlined/>,
+      pathname: "/calculation", component: <Calculation/>
     }, {
       type: 'option', key: 'home', name: 'Дома', icon: <HomeOutlined/>,
       pathname: "/home", component: <Home/>
