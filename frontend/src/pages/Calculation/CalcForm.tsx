@@ -3,7 +3,7 @@
  */
 
 import "./styles.scss";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Input, InputNumber, Select, Tooltip } from "antd";
 import { SnippetsOutlined } from "@ant-design/icons/lib/icons";
 import { Calc } from "./calc-type";
@@ -34,6 +34,12 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc, primary, onSetPrimary }) 
 
   const [ errors, setErrors ] = useState<Error[]>([]);
   const [ form ] = Form.useForm();
+
+  const facRef = useRef<any>(null);
+  const nowRef = useRef<any>(null);
+  const nedRef = useRef<any>(null);
+  const feeRef = useRef<any>(null);
+  const rvlRef = useRef<any>(null);
 
   useEffect(() => {
     form.setFieldsValue({
@@ -105,7 +111,7 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc, primary, onSetPrimary }) 
             errorList.push({
               type: 'warn',
               message: `Вложение превышает остаток:   ${calc.fac} * ${calc.fee} = ${Math.round(calc.fac * calc.fee)}`
-                +` >= ${calc.ned} - ${calcNow} = ${Math.round(calc.ned - calcNow)}`
+                + ` >= ${calc.ned} - ${calcNow} = ${Math.round(calc.ned - calcNow)}`
             });
             enclosure = undefined;
           } else if (enclosure === minEnclosure) {
@@ -153,25 +159,77 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc, primary, onSetPrimary }) 
       .catch(() => onSetPrimary(undefined))
   };
 
+  const onKeyPress = (ev: React.KeyboardEvent) => {
+    // @ts-ignore
+    //console.log("ev = ", ev.key, "; id:", ev.target.id);
+    if (ev.ctrlKey) {
+      // @ts-ignore
+      switch (`${ev.key}-${ev.target.id}`) {
+        case "ArrowRight-fac":
+          //console.log("ArrowRight-fac: nowRef = ", nowRef);
+          nowRef.current!.focus({ cursor: 'end' });
+          break;
+        case "ArrowLeft-fac":
+          //console.log("ArrowLeft-fac");
+          break;
+
+        case "ArrowRight-now":
+          //console.log("ArrowRight-now: nedRef = ", nedRef);
+          nedRef.current!.focus({ cursor: 'start' });
+          break;
+        case "ArrowLeft-now":
+          //console.log("ArrowLeft-now: facRef = ", facRef);
+          facRef.current!.focus({ cursor: 'all' });
+          break;
+
+        case "ArrowRight-ned":
+          //console.log("ArrowRight-ned: nedRef = ", feeRef);
+          feeRef.current!.focus({ cursor: 'all' });
+          break;
+        case "ArrowLeft-ned":
+          //console.log("ArrowLeft-ned: nowRef = ", nowRef);
+          nowRef.current!.focus({ cursor: 'all' });
+          break;
+
+        case "ArrowRight-fee":
+          //console.log("ArrowRight-fee: rvlRef = ", rvlRef);
+          rvlRef.current!.focus({ cursor: 'all' });
+          break;
+        case "ArrowLeft-fee":
+          //console.log("ArrowLeft-fee: nedRef = ", nedRef);
+          nedRef.current!.focus({ cursor: 'all' });
+          break;
+
+        case "ArrowRight-rvl":
+          //console.log("ArrowRight-rvl");
+          break;
+        case "ArrowLeft-rvl":
+          //console.log("ArrowLeft-rvl: nedRef = ", feeRef);
+          feeRef.current!.focus({ cursor: 'all' });
+          break;
+      }
+    }
+  }
+
   return (
     <Form className='calc-form' layout='vertical' form={form}>
       <Input.Group compact>
         <Form.Item name="fac" noStyle>
-          <Select style={{ width: 80 }} onChange={onChangeFactor}>
+          <Select id="fac" ref={facRef} style={{ width: 80 }} onChange={onChangeFactor} onKeyUp={onKeyPress}>
             {FACTOR_OPTION.map((value: number, index: number) => <Option key={index} value={value}>{value}</Option>)}
           </Select>
         </Form.Item>
         <Form.Item name="now">
-          <InputNumber placeholder='внесено' min={0} onChange={onChangeRepayment}/>
+          <InputNumber ref={nowRef} placeholder='внесено' min={0} onChange={onChangeRepayment} onKeyUp={onKeyPress}/>
         </Form.Item>
         <Form.Item name="ned">
-          <InputNumber placeholder='нужно' min={0} onChange={onChangeRepayment}/>
+          <InputNumber ref={nedRef} placeholder='нужно' min={0} onChange={onChangeRepayment} onKeyUp={onKeyPress}/>
         </Form.Item>
         <Form.Item name="fee">
-          <InputNumber placeholder='откат' min={0} onChange={onChangeRepayment}/>
+          <InputNumber ref={feeRef} placeholder='откат' min={0} onChange={onChangeRepayment} onKeyUp={onKeyPress}/>
         </Form.Item>
         <Form.Item name="rvl">
-          <InputNumber placeholder='конкур.' min={0} onChange={onChangeRepayment}/>
+          <InputNumber ref={rvlRef} placeholder='конкур.' min={0} onChange={onChangeRepayment} onKeyUp={onKeyPress}/>
         </Form.Item>
         {minEncl &&
         <Form.Item>
