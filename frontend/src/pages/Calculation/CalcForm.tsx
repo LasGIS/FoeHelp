@@ -153,60 +153,6 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc, primary, onSetPrimary }) 
       .catch(() => onSetPrimary(undefined))
   };
 
-  const onKeyPress = (ev: React.KeyboardEvent) => {
-    // @ts-ignore
-    console.log("ev = ", ev.key, "; id:", ev.target.id);
-//    if (ev.ctrlKey && !ev.shiftKey) {
-      // @ts-ignore
-      switch (`${ev.key}-${ev.target.id}`) {
-        case "Control-fac":
-          //console.log("Control-fac: nowRef = ", nowRef);
-          nowRef.current!.focus({ cursor: 'all' });
-          break;
-        // case "ArrowLeft-fac":
-        //   //console.log("ArrowLeft-fac");
-        //   break;
-
-        case "Control-now":
-          //console.log("Control-now: nedRef = ", nedRef);
-          nedRef.current!.focus({ cursor: 'all' });
-          break;
-        // case "ArrowLeft-now":
-        //   //console.log("ArrowLeft-now: facRef = ", facRef);
-        //   facRef.current!.focus({ cursor: 'all' });
-        //   break;
-
-        case "Control-ned":
-          //console.log("Control-ned: nedRef = ", feeRef);
-          feeRef.current!.focus({ cursor: 'all' });
-          break;
-        // case "ArrowLeft-ned":
-        //   //console.log("ArrowLeft-ned: nowRef = ", nowRef);
-        //   nowRef.current!.focus({ cursor: 'all' });
-        //   break;
-
-        case "Control-fee":
-          //console.log("Control-fee: rvlRef = ", rvlRef);
-          rvlRef.current!.focus({ cursor: 'all' });
-          break;
-        // case "ArrowLeft-fee":
-        //   //console.log("ArrowLeft-fee: nedRef = ", nedRef);
-        //   nedRef.current!.focus({ cursor: 'all' });
-        //   break;
-
-        case "Control-rvl":
-          //console.log("Control-rvl");
-          break;
-        // case "ArrowLeft-rvl":
-        //   //console.log("ArrowLeft-rvl: nedRef = ", feeRef);
-        //   feeRef.current!.focus({ cursor: 'all' });
-        //   break;
-      }
-//      return true;
-//    }
-    return false;
-  }
-
   return (
     <Form className='calc-form' layout='vertical' form={form}>
       <Input.Group compact>
