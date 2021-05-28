@@ -3,7 +3,7 @@
  */
 
 import "./styles.scss";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Input, InputNumber, Select, Tooltip } from "antd";
 import { SnippetsOutlined } from "@ant-design/icons/lib/icons";
 import { Calc } from "./calc-type";
@@ -34,12 +34,6 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc, primary, onSetPrimary }) 
 
   const [ errors, setErrors ] = useState<Error[]>([]);
   const [ form ] = Form.useForm();
-
-  const facRef = useRef<any>(null);
-  const nowRef = useRef<any>(null);
-  const nedRef = useRef<any>(null);
-  const feeRef = useRef<any>(null);
-  const rvlRef = useRef<any>(null);
 
   useEffect(() => {
     form.setFieldsValue({
@@ -217,21 +211,21 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc, primary, onSetPrimary }) 
     <Form className='calc-form' layout='vertical' form={form}>
       <Input.Group compact>
         <Form.Item name="fac" noStyle>
-          <Select id="fac" ref={facRef} style={{ width: 80 }} onChange={onChangeFactor} onKeyUp={onKeyPress}>
+          <Select id="fac" style={{ width: 80 }} onChange={onChangeFactor}>
             {FACTOR_OPTION.map((value: number, index: number) => <Option key={index} value={value}>{value}</Option>)}
           </Select>
         </Form.Item>
         <Form.Item name="now">
-          <InputNumber ref={nowRef} placeholder='внесено' min={0} onChange={onChangeRepayment} onKeyUp={onKeyPress}/>
+          <InputNumber placeholder='внесено' min={0} onChange={onChangeRepayment}/>
         </Form.Item>
         <Form.Item name="ned">
-          <InputNumber ref={nedRef} placeholder='нужно' min={0} onChange={onChangeRepayment} onKeyUp={onKeyPress}/>
+          <InputNumber placeholder='нужно' min={0} onChange={onChangeRepayment}/>
         </Form.Item>
         <Form.Item name="fee">
-          <InputNumber ref={feeRef} placeholder='откат' min={0} onChange={onChangeRepayment} onKeyUp={onKeyPress}/>
+          <InputNumber placeholder='откат' min={0} onChange={onChangeRepayment}/>
         </Form.Item>
         <Form.Item name="rvl">
-          <InputNumber ref={rvlRef} placeholder='конкур.' min={0} onChange={onChangeRepayment} onKeyUp={onKeyPress}/>
+          <InputNumber placeholder='конкур.' min={0} onChange={onChangeRepayment}/>
         </Form.Item>
         {minEncl &&
         <Form.Item>
