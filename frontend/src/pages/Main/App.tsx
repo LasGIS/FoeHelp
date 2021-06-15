@@ -18,7 +18,7 @@ const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
 
 /** Здесь указывается версия билда */
-const version = '1.0.0.14';
+const version = '1.0.0.15';
 
 const resolveSubmenu = (subMenus: MenuData[]) => {
   return subMenus.map((menu: MenuData) => {
@@ -79,7 +79,7 @@ const App: React.FC<PropsFromRedux> = (props) => {
   }, []);
 
   const onSelectMenu = () => {
-    const selectedMenu = findSelectedMenuByPathname(window.location.pathname, MENU_DATA);
+    const selectedMenu = findSelectedMenuByPathname(window.location.hash, MENU_DATA);
     setSelectedKeys([ selectedMenu ? selectedMenu.menu.key : '' ]);
     setBreadcrumbs(selectedMenu ? selectedMenu.breadcrumbs : [ '...' ]);
   };

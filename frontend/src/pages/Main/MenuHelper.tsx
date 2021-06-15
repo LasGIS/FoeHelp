@@ -50,7 +50,7 @@ export const MENU_DATA: MenuData[] = [
     subMenus: [ {
       type: 'option', key: 'calculation', name: 'Расчёт вложения', icon: <CalculatorOutlined/>,
       pathname: "/calculation", component: <Calculation/>
-    },{
+    }, {
       type: 'option', key: 'level-growing', name: 'Рост Уровня', icon: <CalculatorOutlined/>,
       pathname: "/level-growing", component: <Calculation/>
     }, {
@@ -93,7 +93,7 @@ export const findSelectedMenuByPathname = (
         }
         break;
       case "option":
-        if (pathname.startsWith(process.env.PUBLIC_URL + menu.pathname)) {
+        if (pathname.startsWith('#' + process.env.PUBLIC_URL + menu.pathname)) {
           const newBreadcrumbs: string[] = breadcrumbs ? breadcrumbs : [];
           newBreadcrumbs.push(menu.name);
           return {
