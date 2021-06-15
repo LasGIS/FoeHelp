@@ -18,7 +18,7 @@ const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
 
 /** Здесь указывается версия билда */
-const version = '1.0.0.12';
+const version = '1.0.0.14';
 
 const resolveSubmenu = (subMenus: MenuData[]) => {
   return subMenus.map((menu: MenuData) => {
