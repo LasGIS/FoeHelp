@@ -19,7 +19,7 @@ type Props = {
   onClose: () => any;
 };
 
-export const GreatBuildingDetailForm = ({ skills, isExist, editGreatBuilding, onSave, onClose }: Props) => {
+const GreatBuildingDetailForm = ({ skills, isExist, editGreatBuilding, onSave, onClose }: Props) => {
 
   const [ form ] = Form.useForm();
 
@@ -167,3 +167,4 @@ export const GreatBuildingDetailForm = ({ skills, isExist, editGreatBuilding, on
   );
 }
 
+export default GreatBuildingDetailForm;

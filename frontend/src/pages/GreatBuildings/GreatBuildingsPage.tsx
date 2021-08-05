@@ -19,7 +19,7 @@ import {
   setIsNewGreatBuilding,
   updateGreatBuilding
 } from "./services/action-creators";
-import { GreatBuildingDetailForm } from "./GreatBuildingDetailForm";
+import GreatBuildingDetailForm from "./GreatBuildingDetailForm";
 
 class GreatBuildingsPage extends React.Component<PropsFromRedux> {
 
@@ -125,7 +125,7 @@ class GreatBuildingsPage extends React.Component<PropsFromRedux> {
             dataIndex: 'skillTypes',
             width: '300px',
             render: (skillTypes?: SkillType[]) => skillList.filter(skill => skillTypes?.includes(skill.id)).map((skill, index) =>
-              <div><Tooltip key={index} title={skill.definition}>
+              <div key={index}><Tooltip title={skill.definition}>
                 <img key={skill.id} src={skill.image} width='25px' alt={skill.image} className="skill-image"/>{skill.name}
               </Tooltip></div>
             ),

@@ -12,7 +12,7 @@ import { Primary } from "./Calculation";
 
 const { Option } = Select;
 
-const FACTOR_OPTION: number[] = [ 1.85, 1.9, 1.92, 2.0 ];
+const FACTOR_OPTION: number[] = [ 1.85, 1.9, 1.91, 1.92, 1.93, 1.94, 2.0 ];
 
 type Error = {
   message: string;
