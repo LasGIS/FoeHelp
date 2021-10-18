@@ -9,6 +9,7 @@ import { SnippetsOutlined } from "@ant-design/icons/lib/icons";
 import { Calc } from "./calc-type";
 import classNames from "classnames";
 import { Primary } from "./Calculation";
+import copyToClipboard from "copy-to-clipboard";
 
 const { Option } = Select;
 
@@ -150,7 +151,7 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc, primary, onSetPrimary }) 
   const clipboardWriteText = (text: string, primary: Primary) => {
     navigator.clipboard.writeText(text)
       .then(() => onSetPrimary(primary))
-      .catch(() => onSetPrimary(undefined))
+      .catch(() => onSetPrimary(copyToClipboard(text) ? primary : undefined))
   };
 
   return (
