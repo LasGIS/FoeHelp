@@ -8,6 +8,7 @@
       "esnext"
     ],
     "allowJs": true,
+    "checkJs": false,
     "jsx": "react-jsx",
     "strict": true,
     "moduleResolution": "node",
@@ -17,8 +18,15 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true
+  },
+  "ts-node": {
+    "transpileOnly": true,
+    "moduleTypes": {
+      "webpack.config.ts": "package.json",
+      "webpack-config-scripts/**/*": "package.json"
+    }
   },
   "include": [
     "src"

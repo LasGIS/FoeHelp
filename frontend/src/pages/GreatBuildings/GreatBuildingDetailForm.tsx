@@ -141,7 +141,7 @@ export const GreatBuildingDetailForm = ({ skills, isExist, editGreatBuilding, on
         name="skillTypes" label="Усиление ВC"
         rules={[ { required: true } ]}>
         <Select mode='multiple' placeholder={"добавьте усиление"} showSearch filterOption={(input, option) => {
-          return Boolean(option && option.children[1].toLowerCase().indexOf(input.toLowerCase()) >= 0)
+          return Boolean(option && option.children && option.children[1].toLowerCase().indexOf(input.toLowerCase()) >= 0)
         }}>
           {skills?.map((skill, index) => (
             <Option key={`skill_id_option_${index}`} value={skill.id}>
