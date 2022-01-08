@@ -1,23 +1,13 @@
 {
   "files": {
-    "main.css": "/FoeHelp/static/css/main.27aab348.chunk.css",
-    "main.js": "/FoeHelp/static/js/main.704d4d70.chunk.js",
-    "main.js.map": "/FoeHelp/static/js/main.704d4d70.chunk.js.map",
-    "runtime-main.js": "/FoeHelp/static/js/runtime-main.c7676f42.js",
-    "runtime-main.js.map": "/FoeHelp/static/js/runtime-main.c7676f42.js.map",
-    "static/css/2.bc1975cf.chunk.css": "/FoeHelp/static/css/2.bc1975cf.chunk.css",
-    "static/js/2.cd93c398.chunk.js": "/FoeHelp/static/js/2.cd93c398.chunk.js",
-    "static/js/2.cd93c398.chunk.js.map": "/FoeHelp/static/js/2.cd93c398.chunk.js.map",
+    "main.css": "/FoeHelp/static/css/main.4c643080.css",
+    "main.js": "/FoeHelp/static/js/main.40badf1e.js",
     "index.html": "/FoeHelp/index.html",
-    "static/css/2.bc1975cf.chunk.css.map": "/FoeHelp/static/css/2.bc1975cf.chunk.css.map",
-    "static/css/main.27aab348.chunk.css.map": "/FoeHelp/static/css/main.27aab348.chunk.css.map",
-    "static/js/2.cd93c398.chunk.js.LICENSE.txt": "/FoeHelp/static/js/2.cd93c398.chunk.js.LICENSE.txt"
+    "main.4c643080.css.map": "/FoeHelp/static/css/main.4c643080.css.map",
+    "main.40badf1e.js.map": "/FoeHelp/static/js/main.40badf1e.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.c7676f42.js",
-    "static/css/2.bc1975cf.chunk.css",
-    "static/js/2.cd93c398.chunk.js",
-    "static/css/main.27aab348.chunk.css",
-    "static/js/main.704d4d70.chunk.js"
+    "static/css/main.4c643080.css",
+    "static/js/main.40badf1e.js"
   ]
 }
