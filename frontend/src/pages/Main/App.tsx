@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 LasGIS FOE Helper
+ * Copyright 2022 LasGIS FOE Helper
  */
 
 import './App.scss';
@@ -116,7 +116,7 @@ const App: React.FC<PropsFromRedux> = (props) => {
               {RESOLVED_ROUTES}
             </Route>
           </Routes>
-          <Footer className="app__footer">LasGIS ©2020 Created using Ant Design - version({version})</Footer>
+          <Footer className="app__footer">LasGIS ©2022 Created using Ant Design - version({version})</Footer>
         </Layout>
       </Layout>
     </Spin>
