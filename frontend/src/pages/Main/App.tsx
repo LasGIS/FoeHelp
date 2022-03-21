@@ -19,7 +19,7 @@ const { SubMenu } = Menu;
 const { Footer, Sider } = Layout;
 
 /** Здесь указывается версия билда */
-const version = '1.0.1.0';
+const version = '1.0.1.1';
 
 const resolveSubmenu = (subMenus: MenuData[]) => {
   return subMenus.map((menu: MenuData) => {
