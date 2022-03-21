@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/FoeHelp/static/css/main.2d8b3a27.css",
-    "main.js": "/FoeHelp/static/js/main.9502361d.js",
+    "main.css": "/FoeHelp/static/css/main.1a5e1897.css",
+    "main.js": "/FoeHelp/static/js/main.7f5acb70.js",
     "index.html": "/FoeHelp/index.html",
-    "main.2d8b3a27.css.map": "/FoeHelp/static/css/main.2d8b3a27.css.map",
-    "main.9502361d.js.map": "/FoeHelp/static/js/main.9502361d.js.map"
+    "main.1a5e1897.css.map": "/FoeHelp/static/css/main.1a5e1897.css.map",
+    "main.7f5acb70.js.map": "/FoeHelp/static/js/main.7f5acb70.js.map"
   },
   "entrypoints": [
-    "static/css/main.2d8b3a27.css",
-    "static/js/main.9502361d.js"
+    "static/css/main.1a5e1897.css",
+    "static/js/main.7f5acb70.js"
   ]
 }
