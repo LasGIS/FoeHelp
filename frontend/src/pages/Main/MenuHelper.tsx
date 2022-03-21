@@ -93,7 +93,7 @@ export const findSelectedMenuByPathname = (
         }
         break;
       case "option":
-        if (pathname.startsWith('#' + process.env.PUBLIC_URL + menu.pathname)) {
+        if (pathname.startsWith('#' + menu.pathname)) {
           const newBreadcrumbs: string[] = breadcrumbs ? breadcrumbs : [];
           newBreadcrumbs.push(menu.name);
           return {
