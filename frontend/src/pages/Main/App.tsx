@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 LasGIS FOE Helper
+ * Copyright (c) 2022 LasGIS FOE Helper
  */
 
 import './App.scss';
@@ -19,7 +19,7 @@ const { SubMenu } = Menu;
 const { Footer, Sider } = Layout;
 
 /** Здесь указывается версия билда */
-const version = '1.0.1.1';
+const version = '1.0.1.2';
 
 const resolveSubmenu = (subMenus: MenuData[]) => {
   return subMenus.map((menu: MenuData) => {

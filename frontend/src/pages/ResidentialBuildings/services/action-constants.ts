@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 LasGIS FOE Helper
+ * Copyright (c) 2022 LasGIS FOE Helper
  */
 
 export const RESIDENTIAL_BUILDING_EDIT_SHOW = 'GREAT_BUILDING_EDIT_SHOW';

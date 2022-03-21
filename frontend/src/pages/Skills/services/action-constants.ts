@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 LasGIS FOE Helper
+ * Copyright (c) 2022 LasGIS FOE Helper
  */
 
 export const SKILLS_EDIT_SKILL_SHOW = 'SKILLS_EDIT_SKILL_SHOW';

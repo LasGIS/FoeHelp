@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022 LasGIS FOE Helper
+ */
+
 export const compareAlphabetically = (a?: string, b?: string) => {
   const aText = a || '';
   const bText = b || '';

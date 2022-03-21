@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 LasGIS FOE Helper
+ * Copyright (c) 2022 LasGIS FOE Helper
  */
 
 import { COMMON_HIDE_LOADER, COMMON_SHOW_LOADER } from './action-constants';

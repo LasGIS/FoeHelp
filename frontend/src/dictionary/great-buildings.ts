@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022 LasGIS FOE Helper
+ */
+
 /** Великие Строения */
 import { GreatBuilding } from "./dic-type";
 

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2022 LasGIS FOE Helper
+ */
+
 import { Skill } from "./dic-type";
 
 export const SKILLS: Skill[] = [ {

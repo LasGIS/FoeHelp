@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 LasGIS FOE Helper
+ * Copyright (c) 2022 LasGIS FOE Helper
  */
 
 // This optional code is used to register a service worker.

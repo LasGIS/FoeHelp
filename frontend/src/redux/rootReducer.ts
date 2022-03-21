@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 LasGIS FOE Helper
+ * Copyright (c) 2022 LasGIS FOE Helper
  */
 
 import { combineReducers } from 'redux';
