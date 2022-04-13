@@ -128,7 +128,7 @@ export type Building = {
 };
 
 export type SkillType =
-  'guild_goods'
+  | 'guild_goods'
   | 'defence'
   | 'relic_hunt'
   | 'supplies'
@@ -170,7 +170,7 @@ export type Skill = {
 export type GreatBuilding = Building & {
   /** Умения */
   skillTypes?: SkillType[];
-}
+};
 
 export type ResidentialBuilding = Building & {
   /** Стоимость строительства (Монеты, Ресурсы, Бриллианты) */
@@ -179,4 +179,4 @@ export type ResidentialBuilding = Building & {
   benefit?: ResourceCount[];
   /** Производит */
   produce?: ResourceProductivity[];
-}
+};

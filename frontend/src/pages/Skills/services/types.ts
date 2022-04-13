@@ -5,7 +5,7 @@
 import { GetAllActionTypes } from '../../../common/types/redux-types';
 import * as CommonActionMaps from '../../../common/services/action-creators';
 import * as SkillsActionMaps from './action-creators';
-import { Skill } from "../../../dictionary/dic-type";
+import { Skill } from '../../../dictionary/dic-type';
 
 /** Усиления Великих Строений */
 export type SkillsStoreData = {

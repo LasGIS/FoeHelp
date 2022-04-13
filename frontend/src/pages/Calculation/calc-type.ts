@@ -17,6 +17,4 @@ export type Calc = {
 
 export type LSCalc = Calc[];
 
-export const LOCAL_STORAGE_CALC: LSCalc = [
-  { fac: 1.9, fee: 0 },
-];
+export const LOCAL_STORAGE_CALC: LSCalc = [{ fac: 1.9, fee: 0 }];

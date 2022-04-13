@@ -3,7 +3,6 @@
  */
 
 /** Жилые Строения */
-import { ResidentialBuilding } from "./dic-type";
+import { ResidentialBuilding } from './dic-type';
 
-export const RESIDENTIAL_BUILDINGS: ResidentialBuilding[] = [ ];
-
+export const RESIDENTIAL_BUILDINGS: ResidentialBuilding[] = [];

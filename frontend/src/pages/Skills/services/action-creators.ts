@@ -12,7 +12,7 @@ import {
   SKILLS_SET_IS_NEW_SKILL,
   SKILLS_UPDATE_SKILL,
 } from './action-constants';
-import { SkillType, Skill } from "../../../dictionary/dic-type";
+import { Skill, SkillType } from '../../../dictionary/dic-type';
 
 export const editSkillShow = (isShow: boolean) => ({ type: SKILLS_EDIT_SKILL_SHOW, isShow } as const);
 export const setIsNewSkill = (isNew: boolean) => ({ type: SKILLS_SET_IS_NEW_SKILL, isNew } as const);

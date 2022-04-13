@@ -4,14 +4,14 @@
 
 import {
   GREAT_BUILDING_DELETE,
-  GREAT_BUILDING_EDIT_NEW,
   GREAT_BUILDING_EDIT_BY_IP,
+  GREAT_BUILDING_EDIT_NEW,
   GREAT_BUILDING_EDIT_SHOW,
   GREAT_BUILDING_INSERT,
   GREAT_BUILDING_SET_IS_NEW,
   GREAT_BUILDING_UPDATE,
 } from './action-constants';
-import { GreatBuilding } from "../../../dictionary/dic-type";
+import { GreatBuilding } from '../../../dictionary/dic-type';
 
 export const editGreatBuildingShow = (isShow: boolean) => ({ type: GREAT_BUILDING_EDIT_SHOW, isShow } as const);
 export const setIsNewGreatBuilding = (isNew: boolean) => ({ type: GREAT_BUILDING_SET_IS_NEW, isNew } as const);

@@ -2,7 +2,7 @@
  * Copyright (c) 2022 LasGIS FOE Helper
  */
 
-import React from "react";
+import React from 'react';
 import {
   BankOutlined,
   BookOutlined,
@@ -10,14 +10,14 @@ import {
   GlobalOutlined,
   HomeOutlined,
   ReadOutlined,
-  ToolOutlined
-} from "@ant-design/icons/lib/icons";
-import Home from "../Home/Home";
-import ErasPage from "../Eras/ErasPage";
-import GreatBuildingsPage from "../GreatBuildings/GreatBuildingsPage";
-import SkillsPage from "../Skills/SkillsPage";
-import Calculation from "../Calculation/Calculation";
-import ResidentialBuildingsPage from "../ResidentialBuildings/ResidentialBuildingsPage";
+  ToolOutlined,
+} from '@ant-design/icons/lib/icons';
+import Home from '../Home/Home';
+import ErasPage from '../Eras/ErasPage';
+import GreatBuildingsPage from '../GreatBuildings/GreatBuildingsPage';
+import SkillsPage from '../Skills/SkillsPage';
+import Calculation from '../Calculation/Calculation';
+import ResidentialBuildingsPage from '../ResidentialBuildings/ResidentialBuildingsPage';
 
 export type SubmenuData = {
   type: 'submenu';
@@ -46,63 +46,111 @@ export type SelectedMenuData = {
 
 export const MENU_DATA: MenuData[] = [
   {
-    type: 'submenu', key: "help", name: "Помощь", icon: <ToolOutlined/>,
-    subMenus: [ {
-      type: 'option', key: 'calculation', name: 'Расчёт вложения', icon: <CalculatorOutlined/>,
-      pathname: "/calculation", component: <Calculation/>
-    }, {
-      type: 'option', key: 'level-growing', name: 'Рост Уровня', icon: <CalculatorOutlined/>,
-      pathname: "/level-growing", component: <Calculation/>
-    }, {
-      type: 'option', key: 'home', name: 'Дома', icon: <HomeOutlined/>,
-      pathname: "/home", component: <Home/>
-    } ]
-
-  }, {
-    type: 'submenu', key: "dic", name: "Словари", icon: <ReadOutlined/>,
-    subMenus: [ {
-      type: 'option', key: "eras", name: "Эпохи", icon: <BookOutlined/>,
-      pathname: "/eras", component: <ErasPage/>
-    }, {
-      type: 'option', key: "gb-skills", name: "Усиления Великих Строений", icon: <BookOutlined/>,
-      pathname: "/great-building-skills", component: <SkillsPage/>
-    } ]
-  }, {
-    type: 'submenu', key: "builds", name: "Строения", icon: <BankOutlined/>,
-    subMenus: [ {
-      type: 'option', key: "g-build", name: "Великие Строения", icon: <GlobalOutlined/>,
-      pathname: "/great-buildings", component: <GreatBuildingsPage/>
-    }, {
-      type: 'option', key: "r-build", name: "Жилые постройки", icon: <HomeOutlined/>,
-      pathname: "/residential-buildings", component: <ResidentialBuildingsPage/>
-    } ]
-  }
+    type: 'submenu',
+    key: 'help',
+    name: 'Помощь',
+    icon: <ToolOutlined />,
+    subMenus: [
+      {
+        type: 'option',
+        key: 'calculation',
+        name: 'Расчёт вложения',
+        icon: <CalculatorOutlined />,
+        pathname: '/calculation',
+        component: <Calculation />,
+      },
+      {
+        type: 'option',
+        key: 'level-growing',
+        name: 'Рост Уровня',
+        icon: <CalculatorOutlined />,
+        pathname: '/level-growing',
+        component: <Calculation />,
+      },
+      {
+        type: 'option',
+        key: 'home',
+        name: 'Дома',
+        icon: <HomeOutlined />,
+        pathname: '/home',
+        component: <Home />,
+      },
+    ],
+  },
+  {
+    type: 'submenu',
+    key: 'dic',
+    name: 'Словари',
+    icon: <ReadOutlined />,
+    subMenus: [
+      {
+        type: 'option',
+        key: 'eras',
+        name: 'Эпохи',
+        icon: <BookOutlined />,
+        pathname: '/eras',
+        component: <ErasPage />,
+      },
+      {
+        type: 'option',
+        key: 'gb-skills',
+        name: 'Усиления Великих Строений',
+        icon: <BookOutlined />,
+        pathname: '/great-building-skills',
+        component: <SkillsPage />,
+      },
+    ],
+  },
+  {
+    type: 'submenu',
+    key: 'builds',
+    name: 'Строения',
+    icon: <BankOutlined />,
+    subMenus: [
+      {
+        type: 'option',
+        key: 'g-build',
+        name: 'Великие Строения',
+        icon: <GlobalOutlined />,
+        pathname: '/great-buildings',
+        component: <GreatBuildingsPage />,
+      },
+      {
+        type: 'option',
+        key: 'r-build',
+        name: 'Жилые постройки',
+        icon: <HomeOutlined />,
+        pathname: '/residential-buildings',
+        component: <ResidentialBuildingsPage />,
+      },
+    ],
+  },
 ];
 
-export const findSelectedMenuByPathname = (
-  pathname: string, menuData: MenuData[], breadcrumbs?: string[]
-): SelectedMenuData | undefined => {
-  const selected = menuData.map(menu => {
-    switch (menu.type) {
-      case "submenu":
-        const newBreadcrumbs: string[] = breadcrumbs ? [ ...breadcrumbs ] : [];
-        newBreadcrumbs.push(menu.name);
-        const selected = findSelectedMenuByPathname(pathname, menu.subMenus, newBreadcrumbs);
-        if (selected) {
-          return selected
-        }
-        break;
-      case "option":
-        if (pathname.startsWith('#' + menu.pathname)) {
-          const newBreadcrumbs: string[] = breadcrumbs ? breadcrumbs : [];
+export const findSelectedMenuByPathname = (pathname: string, menuData: MenuData[], breadcrumbs?: string[]): SelectedMenuData | undefined => {
+  const selected = menuData
+    .map((menu) => {
+      switch (menu.type) {
+        case 'submenu':
+          const newBreadcrumbs: string[] = breadcrumbs ? [...breadcrumbs] : [];
           newBreadcrumbs.push(menu.name);
-          return {
-            menu: menu,
-            breadcrumbs: newBreadcrumbs
+          const selected = findSelectedMenuByPathname(pathname, menu.subMenus, newBreadcrumbs);
+          if (selected) {
+            return selected;
           }
-        }
-    }
-    return undefined;
-  }).filter(menu => menu);
+          break;
+        case 'option':
+          if (pathname.startsWith('#' + menu.pathname)) {
+            const newBreadcrumbs: string[] = breadcrumbs ? breadcrumbs : [];
+            newBreadcrumbs.push(menu.name);
+            return {
+              menu: menu,
+              breadcrumbs: newBreadcrumbs,
+            };
+          }
+      }
+      return undefined;
+    })
+    .filter((menu) => menu);
   return selected.length ? selected[0] : undefined;
 };

@@ -18,13 +18,10 @@ export const compareNumber = (a?: number, b?: number) => {
   return 0;
 };
 
-export const downloadToFile = (
-  object: any, fileName: string, contentType: string,
-  before?: string, after?: string
-) => {
-  const a = document.createElement("a");
-  const context: string = (before ? before: '') + JSON.stringify(object) + (after ? after: '');
-  const file = new Blob([ context ], { type: contentType });
+export const downloadToFile = (object: any, fileName: string, contentType: string, before?: string, after?: string) => {
+  const a = document.createElement('a');
+  const context: string = (before ? before : '') + JSON.stringify(object) + (after ? after : '');
+  const file = new Blob([context], { type: contentType });
   a.href = URL.createObjectURL(file);
   a.download = fileName;
   a.click();

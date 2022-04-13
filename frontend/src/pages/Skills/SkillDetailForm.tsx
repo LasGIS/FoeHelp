@@ -3,20 +3,19 @@
  */
 
 import React, { useEffect } from 'react';
-import { Skill } from "../../dictionary/dic-type";
-import { Button, Form, Input, Row } from "antd";
-import TextArea from "antd/es/input/TextArea";
+import { Skill } from '../../dictionary/dic-type';
+import { Button, Form, Input, Row } from 'antd';
+import TextArea from 'antd/es/input/TextArea';
 
 type Props = {
-  isExist: boolean,
+  isExist: boolean;
   editSkill?: Skill;
   onSave: (skill: Skill) => any;
   onClose: () => any;
 };
 
 export const SkillDetailForm = ({ isExist, editSkill, onSave, onClose }: Props) => {
-
-  const [ form ] = Form.useForm();
+  const [form] = Form.useForm();
 
   useEffect(() => {
     if (editSkill) {
@@ -24,24 +23,23 @@ export const SkillDetailForm = ({ isExist, editSkill, onSave, onClose }: Props) 
         id: editSkill.id,
         name: editSkill.name,
         definition: editSkill.definition,
-        image: editSkill.image
+        image: editSkill.image,
       };
       form.setFieldsValue(fieldsSkill);
     }
-  }, [ form, editSkill ]);
+  }, [form, editSkill]);
 
   const handleSubmit = () => {
-    form.validateFields()
-      .then(values => {
-        const skill: Skill = {
-          ...editSkill,
-          id: values.id,
-          name: values.name,
-          definition: values.definition,
-          image: values.image
-        };
-        onSave(skill);
-      });
+    form.validateFields().then((values) => {
+      const skill: Skill = {
+        ...editSkill,
+        id: values.id,
+        name: values.name,
+        definition: values.definition,
+        image: values.image,
+      };
+      onSave(skill);
+    });
   };
 
   const layout = {
@@ -56,26 +54,29 @@ export const SkillDetailForm = ({ isExist, editSkill, onSave, onClose }: Props) 
   return (
     <Form {...layout} form={form}>
       <Form.Item
-        name="id" label="ID"
-        rules={[ {
-          required: true,
-          message: 'ID обязательно!',
-        }, {
-          pattern: /^([a-z0-9]+[_])*[a-z0-9]+$/,
-          message: 'ID состоит из LAT в нижнем регистре, разделенных "_"',
-        } ]}>
-        <Input disabled={isExist}/>
+        name="id"
+        label="ID"
+        rules={[
+          {
+            required: true,
+            message: 'ID обязательно!',
+          },
+          {
+            pattern: /^([a-z0-9]+[_])*[a-z0-9]+$/,
+            message: 'ID состоит из LAT в нижнем регистре, разделенных "_"',
+          },
+        ]}
+      >
+        <Input disabled={isExist} />
       </Form.Item>
-      <Form.Item
-        name="name" label="Название"
-        rules={[ { required: true } ]}>
-        <Input/>
+      <Form.Item name="name" label="Название" rules={[{ required: true }]}>
+        <Input />
       </Form.Item>
       <Form.Item name="definition" label="Описание">
-        <TextArea/>
+        <TextArea />
       </Form.Item>
       <Form.Item name="image" label="Картинка (URL)">
-        <Input/>
+        <Input />
       </Form.Item>
       <Row justify="center">
         <Form.Item noStyle>
@@ -89,5 +90,4 @@ export const SkillDetailForm = ({ isExist, editSkill, onSave, onClose }: Props) 
       </Row>
     </Form>
   );
-}
-
+};

@@ -19,7 +19,7 @@ const { SubMenu } = Menu;
 const { Footer, Sider } = Layout;
 
 /** Здесь указывается версия билда */
-const version = '1.0.1.2';
+const version = '1.0.1.3';
 
 const resolveSubmenu = (subMenus: MenuData[]) => {
   return subMenus.map((menu: MenuData) => {
@@ -28,7 +28,7 @@ const resolveSubmenu = (subMenus: MenuData[]) => {
         return (
           <Menu.Item key={menu.key} icon={menu.icon}>
             <span>{menu.name}</span>
-            <Link to={menu.pathname}/>
+            <Link to={menu.pathname} />
           </Menu.Item>
         );
       }
@@ -50,9 +50,7 @@ const resolveRoutes = (subMenus: MenuData[]): any[] => {
     const summary = [];
     switch (menu.type) {
       case 'option': {
-        summary.push(
-          <Route key={menu.key} path={menu.pathname} element={menu.component}/>
-        );
+        summary.push(<Route key={menu.key} path={menu.pathname} element={menu.component} />);
         break;
       }
       case 'submenu': {
@@ -68,20 +66,19 @@ const RESOLVED_SUBMENUS = resolveSubmenu(MENU_DATA);
 const RESOLVED_ROUTES = resolveRoutes(MENU_DATA);
 
 const App: React.FC<PropsFromRedux> = (props) => {
-
   const [menuCollapsed, setMenuCollapsed] = useState<boolean>(true);
   const [selectedKeys, setSelectedKeys] = useState<string[]>(['']);
   const [breadcrumbs, setBreadcrumbs] = useState<string[]>(['...']);
-
-  useEffect(() => {
-    onSelectMenu();
-  }, []);
 
   const onSelectMenu = () => {
     const selectedMenu = findSelectedMenuByPathname(window.location.hash, MENU_DATA);
     setSelectedKeys([selectedMenu ? selectedMenu.menu.key : '']);
     setBreadcrumbs(selectedMenu ? selectedMenu.breadcrumbs : ['...']);
   };
+
+  useEffect(() => {
+    onSelectMenu();
+  }, []);
 
   return (
     <Spin spinning={props.loading} size="large" tip={'Загрузка данных'}>
@@ -94,25 +91,23 @@ const App: React.FC<PropsFromRedux> = (props) => {
             setMenuCollapsed(collapsed);
           }}
         >
-          <div className={cn('app__left-menu__logo', { 'app__left-menu__logo--short': menuCollapsed })}><span>FoeHelp</span></div>
-          <Menu
-            mode="inline"
-            theme="dark"
-            selectedKeys={selectedKeys}
-            onSelect={onSelectMenu}
-            style={{ height: '100%' }}
-          >
+          <div className={cn('app__left-menu__logo', { 'app__left-menu__logo--short': menuCollapsed })}>
+            <span>FoeHelp</span>
+          </div>
+          <Menu mode="inline" theme="dark" selectedKeys={selectedKeys} onSelect={onSelectMenu} style={{ height: '100%' }}>
             {RESOLVED_SUBMENUS}
           </Menu>
         </Sider>
         <Layout style={{ padding: '0 12px' }}>
           <Breadcrumb style={{ margin: '6px 0' }}>
-            {breadcrumbs.map((crumb: string, index: number) => <Breadcrumb.Item key={index}>{crumb}</Breadcrumb.Item>)}
+            {breadcrumbs.map((crumb: string, index: number) => (
+              <Breadcrumb.Item key={index}>{crumb}</Breadcrumb.Item>
+            ))}
           </Breadcrumb>
           <Routes>
-            <Route key="app__content" path="/" element={<MainContent/>}>
-              <Route key="zero" index element={<Calculation/>}/>
-              <Route key="_home" path="/home" element={<Home/>}/>
+            <Route key="app__content" path="/" element={<MainContent />}>
+              <Route key="zero" index element={<Calculation />} />
+              <Route key="_home" path="/home" element={<Home />} />
               {RESOLVED_ROUTES}
             </Route>
           </Routes>
@@ -126,13 +121,13 @@ const App: React.FC<PropsFromRedux> = (props) => {
 const mapState = (state: RootStoreData) => {
   const { loading } = state.common;
   return {
-    loading
+    loading,
   };
 };
 
 const mapDispatch = {
   commonShowLoader,
-  commonHideLoader
+  commonHideLoader,
 };
 
 const connector = connect(mapState, mapDispatch);

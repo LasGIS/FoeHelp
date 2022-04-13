@@ -5,7 +5,7 @@
 import { GetAllActionTypes } from '../../../common/types/redux-types';
 import * as CommonActionMaps from '../../../common/services/action-creators';
 import * as ResidentialBuildingsActionMaps from './action-creators';
-import { ResidentialBuilding } from "../../../dictionary/dic-type";
+import { ResidentialBuilding } from '../../../dictionary/dic-type';
 
 /** Великие Строения */
 export type ResidentialBuildingsStoreData = {

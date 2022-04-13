@@ -15,7 +15,7 @@ export type ErrorDto = {
 
 export type SimpleResponse = {
   /** Состояние выполнения запроса   */
-  status: "OK" | "ERROR";
+  status: 'OK' | 'ERROR';
   /** Сообщение для GUI   */
   message: string;
   /** Список сообщений для GUI */

@@ -4,16 +4,16 @@
 
 import {
   GREAT_BUILDING_DELETE,
-  GREAT_BUILDING_EDIT_NEW,
   GREAT_BUILDING_EDIT_BY_IP,
+  GREAT_BUILDING_EDIT_NEW,
   GREAT_BUILDING_EDIT_SHOW,
   GREAT_BUILDING_INSERT,
   GREAT_BUILDING_SET_IS_NEW,
-  GREAT_BUILDING_UPDATE
+  GREAT_BUILDING_UPDATE,
 } from './action-constants';
 import { GreatBuildingsActions, GreatBuildingsStoreData } from './types';
-import { GREAT_BUILDING } from "../../../dictionary/great-buildings";
-import { GreatBuilding } from "../../../dictionary/dic-type";
+import { GREAT_BUILDING } from '../../../dictionary/great-buildings';
+import { GreatBuilding } from '../../../dictionary/dic-type';
 
 const initialState: GreatBuildingsStoreData = {
   greatBuildingList: GREAT_BUILDING,
@@ -37,7 +37,7 @@ export function greatBuildingsReducer(state: GreatBuildingsStoreData = initialSt
         isNewGreatBuilding: true,
       };
     case GREAT_BUILDING_EDIT_BY_IP: {
-      const filtered: GreatBuilding[] = state.greatBuildingList.filter(greatBuilding => greatBuilding.id === action.id);
+      const filtered: GreatBuilding[] = state.greatBuildingList.filter((greatBuilding) => greatBuilding.id === action.id);
       if (filtered.length) {
         return {
           ...state,
@@ -51,19 +51,19 @@ export function greatBuildingsReducer(state: GreatBuildingsStoreData = initialSt
     case GREAT_BUILDING_INSERT:
       return {
         ...state,
-        greatBuildingList: state.greatBuildingList.concat([ action.greatBuilding ]),
+        greatBuildingList: state.greatBuildingList.concat([action.greatBuilding]),
         isEditGreatBuildingShow: false,
       };
     case GREAT_BUILDING_UPDATE:
       return {
         ...state,
-        greatBuildingList: state.greatBuildingList.map(skl => (skl.id === action.greatBuilding.id) ? action.greatBuilding : skl),
+        greatBuildingList: state.greatBuildingList.map((skl) => (skl.id === action.greatBuilding.id ? action.greatBuilding : skl)),
         isEditGreatBuildingShow: false,
       };
     case GREAT_BUILDING_DELETE:
       return {
         ...state,
-        greatBuildingList: state.greatBuildingList.filter(skl => skl.id !== action.id),
+        greatBuildingList: state.greatBuildingList.filter((skl) => skl.id !== action.id),
         isEditGreatBuildingShow: false,
       };
     default:

@@ -37,6 +37,7 @@
       border-color: crimson;
       background: #200000;
       color: crimson;
+
       &.selected {
         color: white;
         background: #662211;
@@ -47,6 +48,7 @@
       border-color: green;
       background: #001600;
       color: green;
+
       &.selected {
         color: white;
         background: darkgreen;
@@ -57,6 +59,7 @@
       border-color: gold;
       background: #202000;
       color: gold;
+
       &.selected {
         color: white;
         background: darkgoldenrod;
