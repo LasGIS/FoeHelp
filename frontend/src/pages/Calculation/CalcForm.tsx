@@ -34,75 +34,75 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc, primary, onSetPrimary }) 
   const [errors, setErrors] = useState<Error[]>([]);
   const [form] = Form.useForm();
 
-  const calcEnclosure = (calc: Calc) => {
+  const calcEnclosure = (cln: Calc) => {
     const errorList: Error[] = [];
     let minEnclosure: number | undefined = undefined;
     let enclosure: number | undefined = undefined;
     let maxEnclosure: number | undefined = undefined;
 
-    if (calc.fee) {
-      enclosure = Math.round(calc.fac * calc.fee);
-      if (calc.ned) {
-        const calcNow: number = calc.now || 0;
-        if (calc.rvl) {
-          minEnclosure = Math.round((calc.ned - calcNow + calc.rvl) / 2);
-          if (calc.rvl >= Math.round(calc.ned - calcNow)) {
+    if (cln.fee) {
+      enclosure = Math.round(cln.fac * cln.fee);
+      if (cln.ned) {
+        const calcNow: number = cln.now || 0;
+        if (cln.rvl) {
+          minEnclosure = Math.round((cln.ned - calcNow + cln.rvl) / 2);
+          if (cln.rvl >= Math.round(cln.ned - calcNow)) {
             errorList.push({
               type: 'error',
-              message: `Конкурент уже занял это место:   ${calc.rvl} >= ${calc.ned} - ${calcNow} = ${Math.round(calc.ned - calcNow)}`,
+              message: `Конкурент уже занял это место:   ${cln.rvl} >= ${cln.ned} - ${calcNow} = ${Math.round(cln.ned - calcNow)}`,
             });
             enclosure = undefined;
             minEnclosure = undefined;
-          } else if (calc.fee > calc.ned - calcNow) {
+          } else if (cln.fee > cln.ned - calcNow) {
             errorList.push({
               type: 'error',
-              message: `Вложение превышает остаток:   ${calc.fee} > ${calc.ned} - ${calcNow} = ${Math.round(calc.ned - calcNow)}`,
+              message: `Вложение превышает остаток:   ${cln.fee} > ${cln.ned} - ${calcNow} = ${Math.round(cln.ned - calcNow)}`,
             });
             enclosure = undefined;
-          } else if (enclosure > calc.ned - calcNow) {
+          } else if (enclosure > cln.ned - calcNow) {
             errorList.push({
               type: 'warn',
               message:
-                `Вложение превышает остаток:   ${calc.fac} * ${calc.fee} = ${Math.round(calc.fac * calc.fee)}` +
-                ` >= ${calc.ned} - ${calcNow} = ${Math.round(calc.ned - calcNow)}`,
+                `Вложение превышает остаток:   ${cln.fac} * ${cln.fee} = ${Math.round(cln.fac * cln.fee)}` +
+                ` >= ${cln.ned} - ${calcNow} = ${Math.round(cln.ned - calcNow)}`,
             });
             enclosure = undefined;
           } else if (enclosure === minEnclosure) {
             minEnclosure = undefined;
-          } else if (enclosure < (calc.ned - calcNow + calc.rvl) / 2) {
+          } else if (enclosure < (cln.ned - calcNow + cln.rvl) / 2) {
             errorList.push({
               type: 'warn',
               message:
-                `Нет ГАРАНТА для занятия места:  ${calc.fac} * ${calc.fee} = ${Math.round(calc.fac * calc.fee)}` +
-                ` <= (${calc.ned} - ${calcNow} + ${calc.rvl}) / 2 = ${Math.round((calc.ned - calcNow + calc.rvl) / 2)}`,
+                `Нет ГАРАНТА для занятия места:  ${cln.fac} * ${cln.fee} = ${Math.round(cln.fac * cln.fee)}` +
+                ` <= (${cln.ned} - ${calcNow} + ${cln.rvl}) / 2 = ${Math.round((cln.ned - calcNow + cln.rvl) / 2)}`,
             });
             maxEnclosure = minEnclosure;
             minEnclosure = undefined;
           }
         } else {
-          minEnclosure = Math.round((calc.ned - calcNow) / 2);
-          if (calc.fee > calc.ned - calcNow) {
+          minEnclosure = Math.round((cln.ned - calcNow) / 2);
+          if (cln.fee > cln.ned - calcNow) {
             errorList.push({
               type: 'error',
-              message: `Вложение превышает остаток:   ${calc.fee} >= ${calc.ned} - ${calcNow} = ${Math.round(calc.ned - calcNow)}`,
+              message: `Вложение превышает остаток:   ${cln.fee} >= ${cln.ned} - ${calcNow} = ${Math.round(cln.ned - calcNow)}`,
             });
             enclosure = undefined;
-          } else if (enclosure > calc.ned - calcNow) {
+          } else if (enclosure > cln.ned - calcNow) {
             errorList.push({
               type: 'warn',
               message:
-                `Вложение превышает остаток:   ${calc.fac} * ${calc.fee} = ${Math.round(calc.fac * calc.fee)}` +
-                ` >= ${calc.ned} - ${calcNow} = ${Math.round(calc.ned - calcNow)}`,
+                `Вложение превышает остаток:   ${cln.fac} * ${cln.fee} = ${Math.round(cln.fac * cln.fee)}` +
+                ` >= ${cln.ned} - ${calcNow} = ${Math.round(cln.ned - calcNow)}`,
             });
             enclosure = undefined;
           } else if (enclosure === minEnclosure) {
             minEnclosure = undefined;
-          } else if (enclosure < (calc.ned - calcNow) / 2) {
+          } else if (enclosure < (cln.ned - calcNow) / 2) {
             errorList.push({
               type: 'warn',
               message:
-                `Нет ГАРАНТА для занятия места:  ${calc.fac} * ${calc.fee} = ${Math.round(calc.fac * calc.fee)}` +
-                ` <= (${calc.ned} - ${calcNow}) / 2 = ${Math.round((calc.ned - calcNow) / 2)}`,
+                `Нет ГАРАНТА для занятия места:  ${cln.fac} * ${cln.fee} = ${Math.round(cln.fac * cln.fee)}` +
+                ` <= (${cln.ned} - ${calcNow}) / 2 = ${Math.round((cln.ned - calcNow) / 2)}`,
             });
             maxEnclosure = minEnclosure;
             minEnclosure = undefined;
@@ -131,24 +131,24 @@ const CalcForm: React.FC<Props> = ({ calc, onSaveCalc, primary, onSetPrimary }) 
   }, [form, calc]);
 
   const onChangeRepayment = () => {
-    const calc: Calc = form.getFieldsValue();
-    onSaveCalc(calc);
-    calcEnclosure(calc);
+    const ncalc: Calc = form.getFieldsValue();
+    onSaveCalc(ncalc);
+    calcEnclosure(ncalc);
     onSetPrimary(undefined);
   };
 
   const onChangeFactor = (factor: number) => {
-    const calc: Calc = form.getFieldsValue();
-    calc.fac = factor;
-    onSaveCalc(calc);
-    calcEnclosure(calc);
+    const ncalc: Calc = form.getFieldsValue();
+    ncalc.fac = factor;
+    onSaveCalc(ncalc);
+    calcEnclosure(ncalc);
     onSetPrimary(undefined);
   };
 
-  const clipboardWriteText = (text: string, primary: Primary) => {
+  const clipboardWriteText = (text: string, prim: Primary) => {
     navigator.clipboard
       .writeText(text)
-      .then(() => onSetPrimary(primary))
+      .then(() => onSetPrimary(prim))
       .catch(() => onSetPrimary(undefined));
   };
 

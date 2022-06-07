@@ -21,7 +21,7 @@
     "@typescript-eslint/default-param-last": "off",
 
     /* todo next line need to eliminate */
-    "import/no-extraneous-dependencies": "off",
-    "@typescript-eslint/no-shadow": "off"
+//    "import/no-extraneous-dependencies": "off",
+//    "@typescript-eslint/no-shadow": "off"
   }
 }
